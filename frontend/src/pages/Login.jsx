@@ -2,6 +2,8 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
+import { loginSchema } from "../schemas/auth";
+import MinusCircle from "../assets/minus-circle.svg"
 
 import Header from "../components/Header";
 
@@ -9,10 +11,17 @@ import Header from "../components/Header";
 function Login() {
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const validationResult = loginSchema.safeParse({ username, password });
+        if (!validationResult.success) {
+            setErrorMessage(validationResult.error.errors[0].message);
+            return;
+        }
 
         try {
             const res = await api.post("/api/token/", { username, password });
@@ -25,7 +34,7 @@ function Login() {
     };
 
     return (
-        <div>
+        <div className="authentications">
             <Header />
             <div className="container main">
                 <form className="row" onSubmit={handleSubmit}>
@@ -40,7 +49,7 @@ function Login() {
                         <h2>Iniciar sesión</h2>
                         <div className="input-field">
                         <input type="text" className="input" required value={username} onChange={(e) => setUsername(e.target.value)}/>
-                        <label>Correo</label>
+                        <label>Usuario</label>
                         </div>
                         <div className="input-field">
                         <input type="password" className="input" required value={password} onChange={(e) => setPassword(e.target.value)}/>
@@ -49,6 +58,12 @@ function Login() {
                         <div className="input-field">
                         <button className="submit" type="submit">Ingresar</button>
                         </div>
+                        {errorMessage && 
+                            <div className="message-error-layout flex items-center mt-4">
+                                <img src={MinusCircle} alt="MinusCircle" />
+                                <strong className="text-sm pl-2">{errorMessage}</strong>
+                            </div>
+                        }
                         <div className="signin">
                         <span>No tienes una cuenta?<a href="register">Regístrate</a></span>
                         </div>

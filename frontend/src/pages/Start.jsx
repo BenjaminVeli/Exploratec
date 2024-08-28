@@ -1,3 +1,4 @@
+import { useEffect } from 'react';
 import { Link } from "react-router-dom";
 import EncryptButton from '../components/EncryptButton';
 
@@ -12,8 +13,31 @@ import Header from "../components/Header";
 import '../app.css'
 
 function Start() {
+
+    useEffect(() => {
+        const preloader = document.getElementById('preloader');
+        const content = document.getElementById('content');
+        
+        const timer = setTimeout(() => {
+            if (preloader) {
+                preloader.classList.add('fade-out');
+            }
+            if (content) {
+                content.style.display = 'block';
+            }
+        }, 3000);
+
+        return () => clearTimeout(timer);
+    }, []);
+
     return (
         <div>
+            
+            <div id="preloader">
+                <div className="loader">
+                    <span className="loader--blue">Exploratec</span>
+                </div>
+            </div>
 
             <Header />
 

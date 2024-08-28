@@ -1,6 +1,25 @@
+import { useState, useEffect } from "react";
+import api from "../api";
 import HeaderAuth from "../components/Header-auth";
 
 function Form() {
+  const [specialties, setSpecialties ] = useState([]);
+  
+  useEffect(() => {
+    getSpecialties();
+  }, []);
+
+  const getSpecialties = () => {
+    api
+        .get("/api/specialties/") 
+        .then((res) => res.data)
+        .then((data) => {
+            setSpecialties(data);
+            console.log(data);
+        })
+        .catch((err) => alert(err));
+};
+
   return (
     <div>
       <HeaderAuth />
@@ -104,6 +123,11 @@ function Form() {
                         required
                       >
                         <option value="">Selecciona una especialidad</option>
+                        {specialties.map((specialty) => (
+                          <option key={specialty.id} value={specialty.id}>
+                            {specialty.name}
+                          </option>
+                        ))}
                       </select>
                     </div>
                   </div>
@@ -127,10 +151,7 @@ function Form() {
                 </div>
                 <div className="md:col-span-5 text-right">
                   <div className="inline-flex items-end">
-                    <button
-                      type="submit"
-                      className="button--submit text-white font-bold py-2 px-4 rounded"
-                    >
+                    <button type="submit" className="button--submit text-white font-bold py-2 px-4 rounded">
                       Enviar
                     </button>
                   </div>

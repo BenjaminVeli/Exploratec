@@ -1,6 +1,6 @@
 from django.contrib.auth.models import User
 from rest_framework import serializers
-from .models import Especialidad
+from .models import Specialty
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
@@ -11,7 +11,7 @@ class UserSerializer(serializers.ModelSerializer):
         user = User.objects.create_user(**validated_data)
         return user 
 
-class EspecialidadSerializer(serializers.ModelSerializer):
+class SpecialtySerializer(serializers.ModelSerializer):
     class Meta:
-        model = Especialidad
-        fields = ["id", "nombre"]
+        model = Specialty
+        fields = ["id", "name"]

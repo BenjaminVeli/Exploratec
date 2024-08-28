@@ -2,12 +2,64 @@
     --primarioColor: #1276fe;
     --whiteColor: #ffffff;
     --btnNeon: #0055ff;
+    --errorMessage: #e91916;
 }
 
 * {
   font-family: "Inter", sans-serif;
 }
 
+.authentications{
+  background: #f2f4f7;
+}
+
+
+
+/* ---------------- Preloader ----------------*/
+
+#preloader {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: #ffffff;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.loader span {
+  font-size: 30px;
+  animation: blink 2.5s infinite;
+  text-transform: uppercase;
+  letter-spacing: 12px;
+}
+
+.loader--blue{
+  color: #205295;
+  padding: 0 5px;
+}
+
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+.fade-out {
+  animation: fadeOut 1.5s forwards;
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  100% {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+}
 
 
 /* ---------------------- Start ---------------------- */
@@ -87,11 +139,14 @@ span a:hover{
     position: relative;
 }
 
-.error-message{
-    margin: 0;
-    font-size: 14px;
-    color: #EF4444;
-  } 
+
+
+.message-error-layout{
+  border: 1px solid var(--errorMessage);
+  border-left: .4rem solid var(--errorMessage);
+  padding: 1rem 2rem 1rem 1rem !important;
+  border-radius: 0.6rem;
+}
   
 .main{
     display: flex;
@@ -144,6 +199,7 @@ i{
     text-align: center;
     margin-bottom: 45px;
     font-size: 35px;
+    color: #0866ff;
 }
   
 .input-field{
@@ -341,9 +397,11 @@ p {
     border: 1px solid rgba(54, 54, 54, 0.5);
     display: grid;
     grid-template-columns: auto 1fr auto;
-    background-color: rgb(255, 255, 255);
+    background-color: var(--whiteColor);
     transition: all 0.3s;
   }
+
+
   
   .btn__menu {
     position: relative;
@@ -847,10 +905,6 @@ p {
       /* margin: 10px 0 30px 0; */
       font-size: 16px;
     }
-    .challenge__lateral {
-      /* grid-template-columns: 55fr 45fr; */
-      /* gap: 80px; */
-    }
   }
   @media (max-width: 1355px) {
     .layout__cronograma {
@@ -917,12 +971,6 @@ p {
     }
     .text__titulo {
       font-size: 5rem;
-    }
-    .content__text_banner {
-      /* gap: 0px; */
-    }
-    .text__parrafo {
-      /* margin: 40px 0 60px 0; */
     }
     .navigators__container {
       display: none;
@@ -1254,9 +1302,6 @@ p {
     }
     .indicador {
       text-align: center;
-    }
-    .indicadores_content {
-      /* justify-content: center; */
     }
     .pregunta h2 {
       font-size: 19px;

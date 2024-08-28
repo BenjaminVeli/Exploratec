@@ -1,6 +1,8 @@
 import { useState } from "react";
 import api from "../api";
 import { Link, useNavigate } from "react-router-dom";
+import MinusCircle from "../assets/minus-circle.svg"
+import { registerSchema } from "../schemas/auth";
 
 import Header from "../components/Header";
 
@@ -8,10 +10,17 @@ function Register(){
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
     const navigate = useNavigate();
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        const validationResult = registerSchema.safeParse({ email, username, password });
+        if (!validationResult.success) {
+            setErrorMessage(validationResult.error.errors[0].message);
+            return;
+        }
 
         try {
             await api.post("/api/user/register/", { email, username, password });
@@ -22,7 +31,7 @@ function Register(){
     };
 
     return (
-        <div>
+        <div className="authentications">
             <Header />
             <div className="container main">
                 <form className="row" onSubmit={handleSubmit}> 
@@ -50,6 +59,12 @@ function Register(){
                         <div className="input-field">
                         <button className="submit" type="submit">Registrarse</button>
                         </div>
+                        {errorMessage && 
+                            <div className="message-error-layout flex items-center mt-4">
+                                <img src={MinusCircle} alt="MinusCircle" />
+                                <strong className="text-sm pl-2">{errorMessage}</strong>
+                            </div>
+                        }
                         <div className="signin">
                         <span>Ya tienes una cuenta?<Link to="/login">Inicia sesión</Link></span>
                         </div>
