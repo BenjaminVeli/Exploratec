@@ -23,3 +23,21 @@ export const registerSchema = z.object({
     .string()
     .min(1, "La contraseña es requerida")
 });
+
+export const formSchema = z.object({
+  name: z
+  .string()
+  .min(1, "El nombre es requerido."),
+  lastname: z
+  .string()
+  .min(1, "El apellido es requerido."),
+  dni: z
+  .string()
+  .min(1, "El dni es requerido."),
+  phone: z
+  .string()
+  .min(1, "El teléfono es requerido."),
+  reason: z
+  .string()
+  .min(1, "El Motivo es requerido."),
+})

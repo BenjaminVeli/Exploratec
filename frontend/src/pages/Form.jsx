@@ -1,8 +1,16 @@
 import { useState, useEffect } from "react";
 import api from "../api";
 import HeaderAuth from "../components/Header-auth";
+import MinusCircle from "../assets/minus-circle.svg"
+import { formSchema } from "../schemas/auth";
 
 function Form() {
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [dni, setDni] = useState("");
+  const [phone, setPhone] = useState("");
+  const [reason, setReason] = useState("");
+  const [errorMessage, setErrorMessage] = useState("");
   const [specialties, setSpecialties ] = useState([]);
   
   useEffect(() => {
@@ -17,8 +25,19 @@ function Form() {
             setSpecialties(data);
             console.log(data);
         })
-        .catch((err) => alert(err));
-};
+        .catch((err) => alert(err));  
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    const validationResult = formSchema.safeParse({ name, lastname, dni, phone, reason });
+    if (!validationResult.success) {
+      setErrorMessage(validationResult.error.errors[0].message);
+      return;
+    }
+
+  };
 
   return (
     <div>
@@ -35,93 +54,49 @@ function Form() {
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0 bg-slate-200">
-              <form onSubmit="{createNote}">
+              <form onSubmit={handleSubmit}>
                 <h6 className="text-blueGray-400 text-sm mt-3 mb-6 font-bold uppercase">
                   Información
                 </h6>
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="title"
-                      >
-                        Nombre
+                      <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="title">
+                        Nombres
                       </label>
-                      <input
-                        type="text"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        id="title"
-                        name="title"
-                        required
-                      />
+                      <input type="text" value={name} onChange={(e) => setName(e.target.value)} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"/>
                     </div>
                   </div>
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="apellido"
-                      >
-                        Apellido
+                      <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="apellido">
+                        Apellidos
                       </label>
-                      <input
-                        type="text"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        id="apellido"
-                        name="apellido"
-                        required
-                      />
+                      <input type="text" value={lastname} onChange={(e) => setLastname(e.target.value)} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"/>
                     </div>
                   </div>
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="dni"
-                      >
+                      <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="dni">
                         Dni
                       </label>
-                      <input
-                        type="number"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        id="dni"
-                        name="dni"
-                        required
-                      />
+                      <input type="number" value={dni} onChange={(e) => setDni(e.target.value)} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"/>
                     </div>
                   </div>
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="telefono"
-                      >
+                      <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="telefono">
                         Teléfono
                       </label>
-                      <input
-                        type="number"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        id="telefono"
-                        name="telefono"
-                        required
-                      />
+                      <input type="number" value={phone} onChange={(e) => setPhone(e.target.value)} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"/>
                     </div>
                   </div>
                   <div className="w-full lg:w-6/12 px-4">
                     <div className="relative w-full mb-3">
-                      <label
-                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
-                        htmlFor="especialidad"
-                      >
+                      <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="especialidad">
                         Especialidad
                       </label>
-                      <select
-                        id="especialidad"
-                        name="especialidad"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        required
-                      >
+                      <select className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
                         <option value="">Selecciona una especialidad</option>
                         {specialties.map((specialty) => (
                           <option key={specialty.id} value={specialty.id}>
@@ -129,6 +104,16 @@ function Form() {
                           </option>
                         ))}
                       </select>
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                    {errorMessage && 
+                    <div className="message-error-layout flex items-center mt-4 bg-zinc-900">
+                      <img src={MinusCircle} alt="MinusCircle" />
+                      <strong className="text-sm pl-2 text-white">{errorMessage}</strong>
+                    </div>
+                  }
                     </div>
                   </div>
                 </div>
@@ -139,13 +124,7 @@ function Form() {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
-                      <textarea
-                        id="content"
-                        name="content"
-                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                        rows="4"
-                        required
-                      ></textarea>
+                      <textarea value={reason} onChange={(e) => setReason(e.target.value)} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4"></textarea>
                     </div>
                   </div>
                 </div>

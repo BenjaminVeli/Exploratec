@@ -25,5 +25,6 @@ python manage.py runserver
 
 ```sh
 cd frontend
+npm i
 npm run dev
 ```
