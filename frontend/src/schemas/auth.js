@@ -37,6 +37,9 @@ export const formSchema = z.object({
   phone: z
   .string()
   .min(1, "El teléfono es requerido."),
+  specialty: z
+  .string()
+  .min(1, "La especialidad es requerida."),
   reason: z
   .string()
   .min(1, "El Motivo es requerido."),

@@ -5,6 +5,8 @@ import MinusCircle from "../assets/minus-circle.svg"
 import { formSchema } from "../schemas/auth";
 
 function Form() {
+  const [notes, setNotes] = useState([]);
+
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
   const [dni, setDni] = useState("");
@@ -12,9 +14,11 @@ function Form() {
   const [reason, setReason] = useState("");
   const [errorMessage, setErrorMessage] = useState("");
   const [specialties, setSpecialties ] = useState([]);
+  const [selectSpecialty, setSelectEspecialty] = useState("");
   
   useEffect(() => {
     getSpecialties();
+    getNotes();
   }, []);
 
   const getSpecialties = () => {
@@ -28,15 +32,51 @@ function Form() {
         .catch((err) => alert(err));  
   };
 
+
+  const getNotes = () => {
+    api
+        .get("/api/notes/")
+        .then((res) => res.data)
+        .then((data) => {
+            setNotes(data);
+            console.log(data);
+        })
+        .catch((err) => alert(err));
+  }; 
+
+
+  const createNote = () => {
+    api
+      .post("/api/notes/", {
+        name,
+        lastname,
+        dni,
+        phone,
+        reason,
+        specialty: selectSpecialty,
+      })
+      .then((res) => {
+        if (res.status === 201) alert("Registro Exitoso!");
+        else alert("No se pudo realizar el registro.");
+        getNotes();
+      })
+      .catch((error) => {
+        console.error("Error al crear la nota:", error);
+        alert("Ocurrió un error al registrar.");
+      });
+  };
+  
+
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    const validationResult = formSchema.safeParse({ name, lastname, dni, phone, reason });
+    const validationResult = formSchema.safeParse({ name, lastname, dni, phone, specialty: selectSpecialty, reason });
     if (!validationResult.success) {
       setErrorMessage(validationResult.error.errors[0].message);
       return;
     }
 
+    createNote();
   };
 
   return (
@@ -96,7 +136,10 @@ function Form() {
                       <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="especialidad">
                         Especialidad
                       </label>
-                      <select className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">
+                      <select
+                        className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                        value={selectSpecialty} 
+                        onChange={(e) => setSelectEspecialty(e.target.value)}>
                         <option value="">Selecciona una especialidad</option>
                         {specialties.map((specialty) => (
                           <option key={specialty.id} value={specialty.id}>
