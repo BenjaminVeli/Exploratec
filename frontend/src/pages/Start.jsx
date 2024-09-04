@@ -17,6 +17,7 @@ import CampusImg from '../assets/img/campus.png'
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
+import Statitics from '../components/Statitics';
 
 
 import '../app.css'
@@ -145,7 +146,7 @@ function Start() {
                             visitas guiadas presenciales. Esta información nos ayuda a entender mejor los intereses de nuestros futuros estudiantes y a preparar
                             experiencias más personalizadas y relevantes durante las visitas.</p>
                         </div>
-                        
+                        <Statitics />
                     </div>
                 </section>
                 

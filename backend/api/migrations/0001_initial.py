@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
                 ('is_accepted', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
                 ('specialty', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notes_especialidad', to='api.specialty')),
-                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notes', to=settings.AUTH_USER_MODEL)),
+                ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notes_author', to=settings.AUTH_USER_MODEL)),
             ],
         ),
     ]

@@ -111,44 +111,13 @@ span a:hover{
 
 /* ---------------------- Statitics ---------------------- */
 
-.section--estadisticas {
-  padding: 20px;
-  background: #80848b;
-}
-
-.estadisticas-table {
-  width: 700px;
-  border-collapse: collapse;
-  margin: auto;
-}
-
-.estadisticas-table th, .estadisticas-table td {
-  border: 1px solid #ddd;
-  padding: 8px;
-  background-color: #fff;
-}
-
-.estadisticas-table th {
-  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: center;
-  background-color: #4CAF50;
-  color: white;
-}
-
-.section-tittle--career{
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+ .section-tittle--career{
+  margin-top: 1rem;
+  margin-bottom: 1rem;
   text-transform: uppercase;
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   justify-content: center;
   display: flex;
-}
-
-@media (max-width:800px){
-  .estadisticas-table {
-      width: 100%;
-  }
 }
 
 .chart-container {
@@ -156,7 +125,7 @@ span a:hover{
   margin: 20px auto;
   background-color: #fff;
   padding: 20px;
-}
+} 
 
 
 
