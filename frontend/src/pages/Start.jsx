@@ -60,7 +60,7 @@ function Start() {
                             {/* Primera columna  */}
                             <div className="text-left">
                                 <h1 className="text-4xl md:text-6xl text-white uppercase font-black">Exploratec</h1>
-                                <h2 className="text-4xl md:text-6xl text-[rgb(0,171,236)] uppercase font-black">Recorrido 360° del campus sede Lima Tecsup</h2>
+                                <h2 className="text-4xl md:text-6xl text-tecsup uppercase font-black">Recorrido 360° del campus sede Lima Tecsup</h2>
                             </div>
                             {/* Segunda columna  */}
                             <div className="flex justify-center items-center my-6">
@@ -116,7 +116,7 @@ function Start() {
                             whileInView={"show"}
                             viewport={{once: false, amount: 0.7}}
                             className="text-center">
-                            <h2 className='text-4xl font-bold py-3'>En este recorrido virtual <span className='text-blue-400'>conocerás.</span></h2>
+                            <h2 className='text-4xl font-bold py-3'>En este recorrido virtual <span className="text-tecsup">conocerás.</span></h2>
                         </motion.div>
                         <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
                             {data.map((d) => (
@@ -129,7 +129,7 @@ function Start() {
                                     <div className="w-64 bg-white rounded-3xl border border-gray-300 overflow-hidden mb-5">
                                         <img className="w-full" src={d.img} alt={d.alt} />
                                         <div className="p-5">
-                                            <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-800">{d.textH3}<span className="text-blue-400">{d.textSpan}</span></h3>
+                                            <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-800">{d.textH3}<span className="text-tecsup">{d.textSpan}</span></h3>
                                         </div>
                                     </div>
                                 </motion.div>
@@ -140,13 +140,15 @@ function Start() {
 
                 <section id="statistics" className="py-20 bg-neutral-900">
                     <div className="container">
-                        <div className="mb-10 mt-10 flex flex-col items-center">
-                            <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-blue-400">¿Por qué mostramos estas estadísticas?</h2>
-                            <p className="mb-4 text-white"> En esta sección, presentamos las estadísticas de las carreras que nuestros visitantes han seleccionado al inscribirse para nuestras
-                            visitas guiadas presenciales. Esta información nos ayuda a entender mejor los intereses de nuestros futuros estudiantes y a preparar
-                            experiencias más personalizadas y relevantes durante las visitas.</p>
-                        </div>
-                        <Statitics />
+                        <div className="bg-glass">
+                            <div className="mb-10 mt-10 flex flex-col items-center">
+                                <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-tecsup">¿Por qué mostramos estas estadísticas?</h2>
+                                <p className="mb-4 text-black"> En esta sección, presentamos las estadísticas de las carreras que nuestros visitantes han seleccionado al inscribirse para nuestras
+                                visitas guiadas presenciales. Esta información nos ayuda a entender mejor los intereses de nuestros futuros estudiantes y a preparar
+                                experiencias más personalizadas y relevantes durante las visitas.</p>
+                            </div>
+                            <Statitics />
+                        </div>    
                     </div>
                 </section>
                 

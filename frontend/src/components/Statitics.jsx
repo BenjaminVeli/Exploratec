@@ -37,7 +37,6 @@ function Statitics() {
             .catch(err => alert('Error fetching stats: ' + err));
     };
 
-    // Define una lista de colores predefinidos
     const colors = [
         'rgba(255, 99, 132, 0.5)',
         'rgba(54, 162, 235, 0.5)',
@@ -64,37 +63,43 @@ function Statitics() {
 
     const options = {
         responsive: true,
+        indexAxis: 'y', // Cambia a barras horizontales
         scales: {
             x: {
                 grid: {
-                    display: false, // Ocultar líneas de la cuadrícula en el eje x
+                    display: true, // Opcional: Mostrar líneas de la cuadrícula en el eje x
+                },
+            },
+            y: {
+                grid: {
+                    display: false, // Ocultar líneas de la cuadrícula en el eje y
                 },
             },
         },
     };
 
     return (
-        <div>
-            <div className='table__body'>
-                <table>
+        <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
+            <div className="border rounded-xl shadow-sm p-6 bg-neutral-800">
+                <table className="min-w-full divide-y divide-neutral-700">
                     <thead>
-                        <tr>
-                            <th>Carreras</th>
-                            <th>Conteo</th>
+                        <tr className="">
+                            <th className="px-6 py-3 text-start text-xs font-medium uppercase text-blue-500">Carreras</th>
+                            <th className="px-6 py-3 text-start text-xs font-medium uppercase text-blue-500">N° de usuarios</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="min-w-full divide-y divide-neutral-700">
                         {stats.map((stat, index) => (
-                            <tr key={index}>
-                                <td>{stat.specialty__name}</td>
-                                <td>{stat.total}</td>
+                            <tr key={index} className="">
+                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  dark:text-neutral-200">{stat.specialty__name}</td>
+                                <td className="px-6 py-4 whitespace-nowrap text-sm dark:text-neutral-200 text-center">{stat.total}</td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
             </div>
 
-            <div className="chart-container">
+            <div className="chart-container w-full">
                 <h2 className='section-tittle--career'>Estadística de Carreras Seleccionadas por los Usuarios</h2>
                 <Bar data={data} options={options} />
             </div>
