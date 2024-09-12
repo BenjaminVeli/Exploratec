@@ -29,7 +29,13 @@ function Login() {
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
             navigate("/form");
         } catch (error) {
-            alert(error);
+            if (error.response) {
+                if (error.response.status == 401) {
+                    setErrorMessage("Usuario o contraseña son incorrectos.");
+                } else {
+                    setErrorMessage("Ocurrió un error. Inténtalo de nuevo más tarde.")
+                }
+            }
         }
     };
 

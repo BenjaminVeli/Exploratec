@@ -26,7 +26,13 @@ function Register(){
             await api.post("/api/user/register/", { email, username, password });
             navigate("/login");
         } catch (error) {
-            alert(error);
+            if(error.response){
+                if(error.response.status == 400){
+                    setErrorMessage("El nombre de usuario ya esta en uso.");
+                } else {
+                    setErrorMessage("Ocurrió un error. Inténtalo de nuevo más tarde.")
+                }
+            }
         }
     };
 

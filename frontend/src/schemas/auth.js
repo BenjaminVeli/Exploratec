@@ -11,10 +11,10 @@ export const loginSchema = z.object({
 
 
 
-export const registerSchema = z.object({
-  username: z
-    .string()
-    .min(1, "El nombre de usuario es requerido"),
+  export const registerSchema = z.object({
+    username: z
+      .string()
+      .min(1, "El nombre de usuario es requerido"),
   email: z
     .string()
     .email("Debe ser un correo electrónico válido")
@@ -33,10 +33,10 @@ export const formSchema = z.object({
   .min(1, "El apellido es requerido."),
   dni: z
   .string()
-  .min(1, "El dni es requerido."),
+  .length(8, "Debe ingresar un dni válido."),
   phone: z
   .string()
-  .min(1, "El teléfono es requerido."),
+  .length(9, "Debe ingresar un teléfono válido."),
   specialty: z
   .string()
   .min(1, "La especialidad es requerida."),

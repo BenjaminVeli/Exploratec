@@ -79,24 +79,31 @@ function Statitics() {
     };
 
     return (
-        <div className="grid grid-cols-1 lg:grid-cols-2 items-center justify-items-center">
-            <div className="border rounded-xl shadow-sm p-6 bg-neutral-800">
-                <table className="min-w-full divide-y divide-neutral-700">
-                    <thead>
-                        <tr className="">
-                            <th className="px-6 py-3 text-start text-xs font-medium uppercase text-blue-500">Carreras</th>
-                            <th className="px-6 py-3 text-start text-xs font-medium uppercase text-blue-500">N° de usuarios</th>
-                        </tr>
-                    </thead>
-                    <tbody className="min-w-full divide-y divide-neutral-700">
-                        {stats.map((stat, index) => (
-                            <tr key={index} className="">
-                                <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  dark:text-neutral-200">{stat.specialty__name}</td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm dark:text-neutral-200 text-center">{stat.total}</td>
-                            </tr>
-                        ))}
-                    </tbody>
-                </table>
+        <div className="grid grid-cols-1 lg:grid-cols-2 ">
+
+            <div className="flex flex-col">
+                <div className="-m-1.5 overflow-x-auto">
+                    <div className="p-1.5 min-w-full inline-block align-middle">
+                        <div className="overflow-hidden border rounded-xl shadow-sm p-6 bg-neutral-800">
+                            <table className="min-w-full divide-y divide-neutral-700">
+                                <thead>
+                                    <tr>
+                                        <th scope="col" className="px-6 py-3 text-start text-xs font-medium uppercase text-blue-500">Carreras</th>
+                                        <th scope="col" className="px-6 py-3 text-center text-xs font-medium uppercase text-blue-500">N° de usuarios</th>
+                                    </tr>
+                                </thead>
+                                <tbody className="min-w-full divide-y divide-neutral-700">
+                                {stats.map((stat, index) => (
+                                    <tr key={index} className="">
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  dark:text-neutral-200">{stat.specialty__name}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm dark:text-neutral-200 text-center">{stat.total}</td>
+                                    </tr>
+                                ))}
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <div className="chart-container w-full">

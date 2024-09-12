@@ -26,8 +26,8 @@ function Request(){
         api
             .delete(`/api/notes/delete/${id}/`)
             .then((res) => {
-                if (res.status === 204) alert("Note deleted!");
-                else alert("Failed to delete note.");
+                if (res.status === 204) alert("La solicitud fue eliminada correctamente.");
+                else alert("Hubo un error al eliminar la solicitud.");
                 getNotes();
             })
             .catch((error) => alert(error));
@@ -38,12 +38,10 @@ function Request(){
     return (
         <div>
             <HeaderAuth />
-            
-            <div className="container">
+                    
                 {notes.map((note) => (
                     <Note note={note} onDelete={deleteNote} key={note.id} />
                 ))}
-            </div>
 
         </div>  
     );

@@ -17,7 +17,16 @@ class SpecialtySerializer(serializers.ModelSerializer):
         model = Specialty
         fields = ["id", "name"]
         
+# class NoteSerializer(serializers.ModelSerializer):
+#     specialty = SpecialtySerializer(read_only=True)
+    
+#     class Meta:
+#         model = Note
+#         fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
+#         extra_kwargs = {"author": {"read_only": True}}
+
 class NoteSerializer(serializers.ModelSerializer):
+        
     class Meta:
         model = Note
         fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
