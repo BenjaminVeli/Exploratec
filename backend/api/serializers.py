@@ -17,17 +17,27 @@ class SpecialtySerializer(serializers.ModelSerializer):
         model = Specialty
         fields = ["id", "name"]
         
-# class NoteSerializer(serializers.ModelSerializer):
-#     specialty = SpecialtySerializer(read_only=True)
-    
-#     class Meta:
-#         model = Note
-#         fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
-#         extra_kwargs = {"author": {"read_only": True}}
-
 class NoteSerializer(serializers.ModelSerializer):
         
     class Meta:
         model = Note
         fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
         extra_kwargs = {"author": {"read_only": True}}
+    
+    def validate(self, attrs):
+        attrs = super().validate(attrs)
+        user = self.context['request'].user
+        last_note = Note.objects.filter(author=user).order_by('-created_at').first()
+        if last_note and not last_note.is_accepted:
+            raise serializers.ValidationError("No puedes crear más formularios hasta que el formulario anterior sea aceptado.")
+
+        current_accepted_count = Note.objects.filter(is_accepted=True).count()
+        
+        if current_accepted_count >= 2:
+            raise serializers.ValidationError("Se ha alcanzado el límite de formularios aceptados.")
+        return attrs
+
+    def create(self, validated_data):
+        return super().create(validated_data)
+    
+    

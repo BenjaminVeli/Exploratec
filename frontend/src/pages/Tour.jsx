@@ -1,11 +1,14 @@
-function Tour(){
-    return (
-        <div>
-            
-            <p>Hola tour</p>
 
-        </div>
-    );
+import insideOne from '../assets/img/img5.png';
+
+const Tour = () => {
+  return (
+      <div>
+
+        
+
+      </div>
+  );
 }
 
 export default Tour;

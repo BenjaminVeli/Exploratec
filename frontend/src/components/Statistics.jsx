@@ -21,22 +21,24 @@ ChartJS.register(
     Legend
 );
 
-function Statitics() {
+const Statistics = () => {
     const [stats, setStats] = useState([]);
+    const [error, setError] = useState(null);
 
     useEffect(() => {
         fetchSpecialties();
     }, []);
 
-    const fetchSpecialties = () => {
-        api.get('/api/specialty-stats/')
-            .then(res => res.data)
-            .then(data => {
-                setStats(data);
-            })
-            .catch(err => alert('Error fetching stats: ' + err));
+    const fetchSpecialties = async () => {
+        try {
+            const response = await api.get('/api/specialty-stats/');
+            setStats(response.data);
+        } catch (err) {
+            setError('Error fetching stats: ' + err.message);
+        }
     };
 
+    
     const colors = [
         'rgba(255, 99, 132, 0.5)',
         'rgba(54, 162, 235, 0.5)',
@@ -84,6 +86,7 @@ function Statitics() {
             <div className="flex flex-col">
                 <div className="-m-1.5 overflow-x-auto">
                     <div className="p-1.5 min-w-full inline-block align-middle">
+                        {error && <div className="text-red-500 mb-4">{error}</div>}
                         <div className="overflow-hidden border rounded-xl shadow-sm p-6 bg-neutral-800">
                             <table className="min-w-full divide-y divide-neutral-700">
                                 <thead>
@@ -114,4 +117,4 @@ function Statitics() {
     );
 }
 
-export default Statitics;
+export default Statistics;

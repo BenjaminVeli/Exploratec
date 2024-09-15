@@ -1,7 +1,7 @@
 import useMenuToggle from '../hooks/useMenuToggle';
 import { Link } from 'react-router-dom';
 
-function HeaderAuth() {
+const HeaderAuth = () => {
     const { toggleRef, controlPanelRef } = useMenuToggle();
 
   return (

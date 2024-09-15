@@ -1,7 +1,48 @@
-function Note({ note, onDelete }) {
-  
+import {useState} from 'react'
+import html2canvas from 'html2canvas';
+import jsPDF from 'jspdf';
+
+const Note = ({ note, onDelete }) => {
+ 
+  const [loader, setLoader] = useState(false); 
+  const downloadPDF = () => {
+    const capture = document.querySelector('.div-note');
+    capture.classList.add('pdf-capture'); // Añadir la clase para la captura
+    setLoader(true);
+
+    html2canvas(capture).then((canvas) => {
+        const imgData = canvas.toDataURL('image/png');
+        const doc = new jsPDF('l', 'mm', 'a4');
+
+        // Configura las dimensiones del PDF
+        const pdfWidth = 297; // Ancho en mm para A4 horizontal
+        const pdfHeight = 210; // Alto en mm para A4 horizontal
+
+        const imgWidth = canvas.width;
+        const imgHeight = canvas.height;
+        const aspectRatio = imgWidth / imgHeight;
+
+        let finalWidth, finalHeight;
+        if (aspectRatio > 1) {
+            finalWidth = pdfWidth;
+            finalHeight = pdfWidth / aspectRatio;
+        } else {
+            finalHeight = pdfHeight;
+            finalWidth = pdfHeight * aspectRatio;
+        }
+
+        const xPosition = (pdfWidth - finalWidth) / 2; // Centrar horizontalmente
+        const yPosition = (pdfHeight - finalHeight) / 2; // Centrar verticalmente
+
+        doc.addImage(imgData, 'PNG', xPosition, yPosition, finalWidth, finalHeight);
+        setLoader(false);
+        doc.save('Solicitud.pdf');
+
+        capture.classList.remove('pdf-capture'); // Quitar la clase después de la captura
+    });
+};
     return (
-      <div>
+      <div className='div-note md:mt-0 mt-12'>
         <div className="w-full lg:w-6/12 px-4 mx-auto flex items-center justify-center min-h-[100vh]">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
             <div className="rounded-t bg-slate-900 mb-0 px-6 py-6">
@@ -76,12 +117,24 @@ function Note({ note, onDelete }) {
                       <p className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">{note.reason}</p>
                     </div>
                   </div>
-                </div>
-                <div className="md:col-span-5 text-right">
-                  <div className="inline-flex items-end">
-                    <button className="button--delete text-white font-bold py-2 px-4 rounded" onClick={() => onDelete(note.id)}>
-                      Eliminar
-                    </button>
+                  <div className="w-full lg:w-6/12 px-4">
+                    <div className="relative w-full mb-3">
+                      {note.is_accepted ? (
+                        <p className="text-green-600">Solicitud de visita aceptada.</p>
+                      ) : (
+                        <p className="text-red-600">Solicitud de visita en espera.</p>
+                      )}
+                    </div>
+                  </div>
+                  <div className="w-full lg:w-6/12 px-4 flex justify-end">
+                    <button className="button--submit text-white font-bold py-2 px-4 rounded mr-1" onClick={downloadPDF} disabled={!(loader===false)}>
+                      {loader?(
+                        <span>Descargando</span>
+                      ):(
+                        <span>Descargar</span>
+                      )}
+                      </button>
+                    <button className="button--delete text-white font-bold py-2 px-4 rounded ml-1" onClick={() => onDelete(note.id)}>Eliminar</button>
                   </div>
                 </div>
               </div>

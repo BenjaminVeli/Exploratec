@@ -4,7 +4,7 @@ import api from "../api";
 import HeaderAuth from "../components/Header-auth";
 import Note from "../components/Note";
 
-function Request(){
+const Request = () =>{
     const [notes, setNotes] = useState([]);
 
     useEffect(() => {

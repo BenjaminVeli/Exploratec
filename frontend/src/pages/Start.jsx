@@ -17,11 +17,11 @@ import CampusImg from '../assets/img/campus.png';
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
-import Statitics from '../components/Statitics';
+import Statistics from '../components/Statistics';
 
 import '../app.css';
 
-function Start() {
+const Start = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
@@ -157,7 +157,7 @@ function Start() {
 
 
 
-                                    <Statitics />
+                                    <Statistics />
                                 </div>    
                             </div>
                         </section>
