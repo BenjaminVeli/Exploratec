@@ -1,11 +1,16 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import api from "../api";
 import HeaderAuth from "../components/Header-auth";
 import MinusCircle from "../assets/minus-circle.svg"
 import { formSchema } from "../schemas/auth";
 
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 function Form() {
   const [notes, setNotes] = useState([]);
+  const navigate = useNavigate();
 
   const [name, setName] = useState("");
   const [lastname, setLastname] = useState("");
@@ -56,14 +61,42 @@ function Form() {
         specialty: selectSpecialty,
       })
       .then((res) => {
-        if (res.status === 201) alert("Registro Exitoso!");
-        else alert("No se pudo realizar el registro.");
+        if (res.status === 201) {
+          toast.success("Formulario enviado correctamente.", {
+            position: "bottom-right",
+            autoClose: 2500,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+
+          setTimeout(() => {
+            navigate("/request");
+          }, 2500);
+    
+        }else alert("No se pudo realizar el registro.");
         getNotes();
       })
       .catch((error) => {
-        console.error("Error al crear la nota:", error);
-        alert("Ocurrió un error al registrar.");
-      });
+        // Extraer mensajes de error del serializer
+        if (error.response && error.response.data) {
+            const errorMessages = error.response.data; // Esto debe ser un objeto con los errores del serializer
+
+            // Muestra los errores específicos del serializer
+            if (errorMessages.non_field_errors) {
+                setErrorMessage(errorMessages.non_field_errors.join(", "));
+            } else {
+                const errorKeys = Object.keys(errorMessages);
+                const messages = errorKeys.map(key => `${key}: ${errorMessages[key].join(", ")}`).join(", ");
+                setErrorMessage(messages);
+            }
+        } else {
+            console.error("Error desconocido:", error);
+            setErrorMessage("Ocurrió un error al registrar.");
+        }
+    });
   };
   
 
@@ -183,7 +216,7 @@ function Form() {
           </div>
         </div>
       </div>
-
+      <ToastContainer />        
     </div>
   );
 }

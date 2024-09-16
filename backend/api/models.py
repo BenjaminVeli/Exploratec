@@ -15,5 +15,5 @@ class Note(models.Model):
     specialty = models.ForeignKey(Specialty, on_delete=models.CASCADE, related_name="notes_especialidad")
     reason = models.TextField()
     is_accepted = models.BooleanField(default=False)
-    created_at = models.DateField(auto_now_add=True)
+    created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes_author")

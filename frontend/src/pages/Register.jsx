@@ -6,6 +6,9 @@ import { registerSchema } from "../schemas/auth";
 
 import Header from "../components/Header";
 
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
 function Register(){
     const [email, setEmail] = useState("");
     const [username, setUsername] = useState("");
@@ -24,7 +27,19 @@ function Register(){
 
         try {
             await api.post("/api/user/register/", { email, username, password });
-            navigate("/login");
+            toast.success("¡Registro exitoso!", {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+        
+              setTimeout(() => {
+                navigate("/login");
+              }, 2500);
         } catch (error) {
             if(error.response){
                 if(error.response.status == 400){
@@ -78,6 +93,7 @@ function Register(){
                     </div>
                 </form>
             </div>
+            <ToastContainer />
         </div>
     );
 }

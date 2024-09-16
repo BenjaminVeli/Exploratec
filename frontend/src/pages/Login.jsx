@@ -7,6 +7,10 @@ import MinusCircle from "../assets/minus-circle.svg"
 
 import Header from "../components/Header";
 
+import { ToastContainer, toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
+
+
 
 function Login() {
     const [username, setUsername] = useState("");
@@ -27,7 +31,19 @@ function Login() {
             const res = await api.post("/api/token/", { username, password });
             localStorage.setItem(ACCESS_TOKEN, res.data.access);
             localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-            navigate("/form");
+            toast.success("¡Inicio de sesión exitoso! Bienvenido.", {
+                position: "bottom-right",
+                autoClose: 2500,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+              });
+        
+              setTimeout(() => {
+                navigate("/form");
+              }, 2500);
         } catch (error) {
             if (error.response) {
                 if (error.response.status == 401) {
@@ -78,7 +94,7 @@ function Login() {
                 </form>
             </div>
 
-
+            <ToastContainer />
         </div>
     );
 }
