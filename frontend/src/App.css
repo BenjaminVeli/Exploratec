@@ -4,6 +4,7 @@
     --btnNeon: #0055ff;
     --errorMessage: #e91916;
     --colorTecsup: rgba(0, 171, 236, 1);
+    --textBlue500: #3b82f6;
 }
 
 * {
@@ -16,6 +17,104 @@
 
 .text-tecsup{
   color: var(--colorTecsup);
+}
+
+/* ---------------- Modal ----------------*/
+
+.modal-content{
+  padding: 30px 55px 30px 55px;
+  width: 700px;
+  height: 450px;
+  background: rgba(0, 0, 0, 0.5);
+}
+
+.modal-title{
+  color: var(--whiteColor);
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 48px;
+  line-height: 48px;
+}
+
+.modal-close{
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 40px;
+}
+
+.modal-line{
+  height: 4px;
+  width: 350px;
+  background: #fff;
+  border-radius: 0.25rem;
+}
+
+.instruction{
+  padding-top: 8px;
+  padding-bottom: 8px;
+  border-color: var(--whiteColor);
+}
+
+.pc-instruction{
+  border-right-width: 1px;
+  padding-right: 40px;
+}
+
+.mobile-instruction{
+  border-left-width: 1px;
+  padding-left: 40px;
+}
+
+.instruction-text{
+  color: var(--textBlue500);
+  font-size: 24px;
+  line-height: 32px;
+}
+
+.title-instruction-text{
+  color: var(--whiteColor);
+  text-transform: uppercase;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+@media (max-width: 768px){
+  .modal-content{
+    padding: 10px 20px 10px 20px;
+    width: 300px;
+    height: 190px;
+  }
+  .modal-title{
+    font-size: 20px;
+    line-height: 20px;
+  }
+  .modal-close{
+    width: 24px;
+  }
+  .modal-line{
+    height: 2px;
+    width: 140px;
+  }
+  .instruction{
+    padding-top: 6px;
+    padding-bottom: 6px;
+  }
+  .pc-instruction{
+    padding-right: 16px;
+  }
+  
+  .mobile-instruction{
+    padding-left: 16px;
+  }
+  .title-instruction-text{
+    font-size: 8px;
+    line-height: 12px;
+  }
+  .instruction-text{
+    font-size: 10px;
+    line-height: 12px;
+  }
 }
 
 
