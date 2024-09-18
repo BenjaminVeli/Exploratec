@@ -21,11 +21,19 @@
 
 /* ---------------- Modal ----------------*/
 
+.modal {
+  display: flex; 
+  justify-content: center; 
+  width: 100%;
+  padding-top: 100px; 
+}
+
 .modal-content{
   padding: 30px 55px 30px 55px;
   width: 700px;
   height: 450px;
   background: rgba(0, 0, 0, 0.5);
+  
 }
 
 .modal-title{

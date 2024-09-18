@@ -1,14 +1,23 @@
+import { BookOpenText, Building, Building2, CodeXml, Warehouse } from 'lucide-react';
 import DisplacementImg from '../assets/img/displacement.png';
 import MouseImg from '../assets/img/mouse.png';
 import RectangleSvg from "../assets/rectangle-xmark.svg";
+import Sidebar,{SidebarItem} from '../components/Sidebar';
 
 const Tour = () => {
   return (
-      <div>
+      <div className="flex">
+        
+        <Sidebar>
+            <SidebarItem icon={<Building2 size={20} />} text="Entrada Principal" active />
+            <SidebarItem icon={<BookOpenText size={20} />} text="Biblioteca"  />
+            <SidebarItem icon={<Building  size={20} />} text="Patio Central" alert />
+            <SidebarItem icon={<CodeXml size={20} />} text="Patio Software"  />
+            <SidebarItem icon={<Warehouse  size={20} />} text="Patio Mecánica"  />
+        </Sidebar>
 
-        <div id="ModalWelcome" className="modal flex justify-center pt-24">
+        <div id="ModalWelcome" className="modal">
           <div className="modal-content">
-
             <div className="grid grid-cols-3">
               <h2 className="modal-title col-span-2">Bienvenido al <span className="text-blue-500">tour virtual </span>de tecsup</h2>
               <div className="relative">
