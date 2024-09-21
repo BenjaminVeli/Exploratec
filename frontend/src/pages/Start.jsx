@@ -86,7 +86,7 @@ const Start = () => {
                                     variants={fadeIn("right", 0.3)}
                                     initial="hidden"
                                     whileInView={"show"}
-                                    viewport={{ once: false, amount: 0.3 }}
+                                    viewport={{ once: true, amount: 0.3 }}
                                     className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
                                     <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-black">
                                         ¿Te gustaría participar en una visita guiada en persona?
@@ -99,7 +99,7 @@ const Start = () => {
                                     variants={fadeIn("up", 0.3)}
                                     initial="hidden"
                                     whileInView={"show"}
-                                    viewport={{ once: false, amount: 0.3 }}
+                                    viewport={{ once: true, amount: 0.3 }}
                                     className="grid grid-cols-2 gap-4 mt-8">
                                     <img src={VisitImg} alt="VisitTecsup" className="w-full rounded-lg" />
                                     <img src={AdverstingImg} alt="AdverstingTecsup" className="mt-4 w-full lg:mt-10 rounded-lg" />
@@ -117,7 +117,7 @@ const Start = () => {
                                     variants={fadeIn("up", 0.2)}
                                     initial="hidden"
                                     whileInView={"show"}
-                                    viewport={{ once: false, amount: 0.7 }}
+                                    viewport={{ once: true, amount: 0.7 }}
                                     className="text-center">
                                     <h2 className='text-4xl font-bold py-3'>En este recorrido virtual <span className="text-tecsup">conocerás.</span></h2>
                                 </motion.div>
@@ -127,7 +127,7 @@ const Start = () => {
                                             variants={fadeIn("up", 0.2)}
                                             initial="hidden"
                                             whileInView={"show"}
-                                            viewport={{ once: false, amount: 0.4 }}
+                                            viewport={{ once: true, amount: 0.2 }}
                                             key={d.id} className="flex justify-center items-center p-5"> 
                                             <div className="w-64 bg-white rounded-3xl border border-gray-300 overflow-hidden mb-5">
                                                 <img className="w-full" src={d.img} alt={d.alt} />

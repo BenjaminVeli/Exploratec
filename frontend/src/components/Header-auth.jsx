@@ -42,7 +42,7 @@ const HeaderAuth = () => {
             </div>
             <div className="navigators">
               <div className="navigators__container">
-                <Link to="/request" className="enlace menu enlacesnavi active">Solicitud</Link>
+                <Link to="/request" className="enlace menu enlacesnavi">Solicitud</Link>
                 <Link to="/form" className="enlace menu enlacesnavi">Formulario</Link>
                 <Link to="/logout" className="enlace menu enlacesnavi">Cerrar sesión</Link>
               </div>

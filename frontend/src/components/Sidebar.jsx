@@ -1,7 +1,7 @@
 import {  ChevronLast, ChevronFirst } from "lucide-react"
 import { useContext, createContext, useState } from "react"
 import TecsupLogoImg from '../assets/img/Tecsup.png';
-import Degree360Img from '../assets/360-degrees.svg'
+import Degree360Img from '../assets/svg/360-degrees.svg'
 
 const SidebarContext = createContext()
 
@@ -9,16 +9,16 @@ export default function Sidebar({ children }) {
   const [expanded, setExpanded] = useState(true)
   
   return (
-    <aside className="h-screen fixed z-50">
+    <aside className="h-screen fixed z-50" >
 
       <nav className="h-full flex flex-col bg-white border-r shadow-sm">
-        <div className="p-4 pb-2 flex justify-between items-center">
+        <div className="px-4 py-12  flex justify-between items-center">
           <img
             src={TecsupLogoImg}
             className={`overflow-hidden transition-all ${
-              expanded ? "w-40" : "w-0"
+              expanded ? "w-36" : "w-0"
             }`}
-            alt=""
+            alt="LogoTecsup"
           />
           <button
             onClick={() => setExpanded((curr) => !curr)}
@@ -29,7 +29,7 @@ export default function Sidebar({ children }) {
         </div>
 
         <SidebarContext.Provider value={{ expanded }}>
-          <ul className="flex-1 px-3">{children}</ul>
+          <ul className="flex-1 px-3 py-10">{children}</ul>
         </SidebarContext.Provider>
 
         <div className="border-t flex p-3 ">

@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@photo-sphere-viewer/core": "^5.10.0",
+    "@photo-sphere-viewer/markers-plugin": "^5.10.0",
     "axios": "^1.7.5",
     "framer-motion": "^11.3.30",
     "html2canvas": "^1.4.1",
@@ -20,6 +21,7 @@
     "react": "^18.3.1",
     "react-chartjs-2": "^5.2.0",
     "react-dom": "^18.3.1",
+    "react-photo-sphere-viewer": "^6.0.0",
     "react-router-dom": "^6.26.1",
     "react-toastify": "^10.0.5",
     "three": "^0.168.0",

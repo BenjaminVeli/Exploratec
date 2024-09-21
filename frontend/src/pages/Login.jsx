@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import api from "../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import { loginSchema } from "../schemas/auth";
-import MinusCircle from "../assets/minus-circle.svg"
+import MinusCircle from "../assets/svg/minus-circle.svg"
 
 import Header from "../components/Header";
 

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import api from "../api";
 import { Link, useNavigate } from "react-router-dom";
-import MinusCircle from "../assets/minus-circle.svg"
+import MinusCircle from "../assets/svg/minus-circle.svg"
 import { registerSchema } from "../schemas/auth";
 
 import Header from "../components/Header";

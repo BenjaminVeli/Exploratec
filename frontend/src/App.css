@@ -19,13 +19,19 @@
   color: var(--colorTecsup);
 }
 
+/* ---------------- 360° ----------------*/
+
+.psv-navbar{
+  justify-content: center;
+}
+
 /* ---------------- Modal ----------------*/
 
 .modal {
   display: flex; 
   justify-content: center; 
-  width: 100%;
   padding-top: 100px; 
+  z-index: 10;
 }
 
 .modal-content{
@@ -175,7 +181,7 @@
 
 /* ---------------------- Start ---------------------- */
 #main-entrance {
-    background: url("../public/img/entrance.png");
+    background: url("/img/entrance.png");
     background-position: center;
     background-size: cover;
     display: flex;
@@ -273,7 +279,7 @@ span a:hover{
 /* ---------------------- Authentication Styles ---------------------- */
 
 .side-image--register{
-    background-image: url("../public/img/register.jpg");
+    background-image: url("/img/register.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -282,7 +288,7 @@ span a:hover{
 }
 
 .side-image--login{
-    background-image: url("../public/img/login.jpg");
+    background-image: url("/img/login.jpg");
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
@@ -726,21 +732,42 @@ p {
     background-color: var(--primarioColorDisabled);
   }
   
-  a.enlacesnavi::after {
-    content: "";
-    position: absolute;
-    width: 100%;
-    height: 3px;
-    background-color: var(--primarioColor);
-    left: 0;
-    bottom: 0;
-    transform: scale(0);
-    border-radius: 2px;
-    transition: transform 0.4s;
+
+
+  .enlacesnavi {
+      position: relative; /* Asegúrate de que el elemento tenga posición relativa */
+      text-decoration: none; /* Quitar subrayado por defecto */
+      color: inherit; /* Asegura que el color del texto sea el heredado */
   }
-  a.enlacesnavi.active::after {
-    transform: scale(1);
+
+  .enlacesnavi::after {
+      content: "";
+      position: absolute;
+      width: 100%;
+      height: 3px;
+      background-color: var(--primarioColor);
+      left: 0;
+      bottom: 0;
+      transform: scaleX(0); /* Comenzar oculto */
+      border-radius: 2px;
+      transition: transform 0.4s; /* Transición suave */
   }
+
+  /* Mostrar el subrayado al hacer hover */
+  .enlacesnavi:hover::after {
+      transform: scaleX(1); /* Mostrar el subrayado */
+  }
+
+
+
+
+
+
+
+
+
+
+  
   
   .inscribirse.navbar {
     /* width: 190px; */

@@ -42,7 +42,7 @@ const  Header = () => {
             </div>
             <div className="navigators">
               <div className="navigators__container">
-                <Link to="/" className="enlace menu enlacesnavi active">Inicio</Link>
+                <Link to="/" className="enlace menu enlacesnavi">Inicio</Link>
                 <Link to="/login" className="enlace menu enlacesnavi">Iniciar sesión</Link>
                 <Link to="/register" className="enlace menu enlacesnavi">Regístrate</Link>
               </div>
