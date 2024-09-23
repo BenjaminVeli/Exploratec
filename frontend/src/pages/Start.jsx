@@ -83,6 +83,40 @@ const Start = () => {
                             </div>
                         </section>
 
+                        <section id="explore" className="py-28">
+                            <div className="container">
+                                <motion.div 
+                                    variants={fadeIn("up", 0.2)}
+                                    initial="hidden"
+                                    whileInView={"show"}
+                                    viewport={{ once: true, amount: 0.7 }}
+                                    className="text-center">
+                                    <h2 className='text-4xl font-bold py-3'>En este recorrido virtual <span className="text-tecsup">conocerás.</span></h2>
+                                </motion.div>
+                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
+                                    {data.map((d) => (
+                                        <motion.div 
+                                            variants={fadeIn("up", 0.2)}
+                                            initial="hidden"
+                                            whileInView={"show"}
+                                            viewport={{ once: true, amount: 0.2 }}
+                                            key={d.id} className="flex justify-center items-center p-5"> 
+                                            <div className="w-64 bg-white rounded-3xl border border-gray-300 overflow-hidden mb-5 hover:scale-105 transition-all duration-500">
+                                                <img className="w-full" src={d.img} alt={d.alt} />
+                                                <div className="p-5">
+                                                    <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-800">{d.textH3}<span className="text-tecsup">{d.textSpan}</span></h3>
+                                                </div>
+                                            </div>
+                                        </motion.div>
+                                    ))}
+                                </div>
+                            </div>
+                        </section>
+
+                        <section id="TecsupLima">
+                            <img src={TecsuImg} alt="TecsupLima" className='w-full' />
+                        </section>
+
                         <section id="information" className="py-16">
                             <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
                                 <motion.div 
@@ -107,40 +141,6 @@ const Start = () => {
                                     <img src={VisitImg} alt="VisitTecsup" className="w-full rounded-lg" />
                                     <img src={AdverstingImg} alt="AdverstingTecsup" className="mt-4 w-full lg:mt-10 rounded-lg" />
                                 </motion.div>
-                            </div>
-                        </section>
-
-                        <section id="TecsupLima">
-                            <img src={TecsuImg} alt="TecsupLima" className='w-full' />
-                        </section>
-
-                        <section id="explore" className="py-28">
-                            <div className="container">
-                                <motion.div 
-                                    variants={fadeIn("up", 0.2)}
-                                    initial="hidden"
-                                    whileInView={"show"}
-                                    viewport={{ once: true, amount: 0.7 }}
-                                    className="text-center">
-                                    <h2 className='text-4xl font-bold py-3'>En este recorrido virtual <span className="text-tecsup">conocerás.</span></h2>
-                                </motion.div>
-                                <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
-                                    {data.map((d) => (
-                                        <motion.div 
-                                            variants={fadeIn("up", 0.2)}
-                                            initial="hidden"
-                                            whileInView={"show"}
-                                            viewport={{ once: true, amount: 0.2 }}
-                                            key={d.id} className="flex justify-center items-center p-5"> 
-                                            <div className="w-64 bg-white rounded-3xl border border-gray-300 overflow-hidden mb-5">
-                                                <img className="w-full" src={d.img} alt={d.alt} />
-                                                <div className="p-5">
-                                                    <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-800">{d.textH3}<span className="text-tecsup">{d.textSpan}</span></h3>
-                                                </div>
-                                            </div>
-                                        </motion.div>
-                                    ))}
-                                </div>
                             </div>
                         </section>
 
@@ -172,7 +172,7 @@ const Start = () => {
                                 </div>
                                 <div className="grid grid-cols-1 lg:grid-cols-2">
                                     {/* Primera columna */}
-                                    <div className="group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg bg-slate-800 p-0.5 transition-all duration-500 hover:scale-[1.01] hover:bg-gradient-to-br from-indigo-200 via-indigo-200/0 to-indigo-200 mt-4">
+                                    <div className="group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg bg-slate-800 p-0.5 transition-all duration-500 hover:bg-gradient-to-br from-indigo-200 via-indigo-200/0 to-indigo-200 mt-4 hover:scale-105">
                                         <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] bg-slate-900 p-8 transition-colors duration-500 group-hover:bg-slate-800">
                                             <img src={Backend} alt="imgBackend" className='w-60'/>
                                             <h3 className='relative z-10 mb-1 w-full text-2xl font-bold text-slate-50 text-center'>William Postillos</h3>
@@ -181,7 +181,7 @@ const Start = () => {
                                         </div>
                                     </div>
                                     {/* Segunda columna */}
-                                    <div className="group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg bg-slate-800 p-0.5 transition-all duration-500 hover:scale-[1.01] hover:bg-slate-800/50 hover:bg-gradient-to-br from-indigo-200 via-indigo-200/0 to-indigo-200 mt-4 ">
+                                    <div className="group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg bg-slate-800 p-0.5 transition-all duration-500 hover:bg-gradient-to-bl from-indigo-200 via-indigo-200/0 to-indigo-200 mt-4 hover:scale-105">
                                         <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] bg-slate-900 p-8 transition-colors duration-500 group-hover:bg-slate-800">
                                             <img src={Frontend} alt="imgFrontend" className='w-60'/>
                                             <h3 className='relative z-10 mb-1 w-full text-2xl font-bold text-slate-50 text-center'>Benjamín Veli</h3>
