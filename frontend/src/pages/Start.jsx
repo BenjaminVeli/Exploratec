@@ -9,11 +9,14 @@ import Logo360Img from '../assets/img/360.png';
 import TecsuImg from '../assets/img/TecsupLima.png';
 import AdverstingImg from '../assets/img/adversting.jpg';
 import VisitImg from '../assets/img/visit.jpg';
+import Frontend from '../assets/img/frontend.png';
+import Backend from '../assets/img/backend.png';
 
 import DoubtsImg from '../assets/img/doubt.jpg';
 import ActivityImg from '../assets/img/activity.jpg';
 import LabImg from '../assets/img/lab.jpg';
 import CampusImg from '../assets/img/campus.png';
+import CodeSvg from "../assets/svg/code.svg";
 
 import Footer from "../components/Footer";
 import Header from "../components/Header";
@@ -159,6 +162,34 @@ const Start = () => {
 
                                     <Statistics />
                                 </div>    
+                            </div>
+                        </section>
+
+                        <section id="team" className='py-20 bg-slate-950'>
+                            <div className="container mx-auto">
+                                <div className="text-center">
+                                    <h2 className="text-4xl font-bold py-3 text-white"><span className="inline-block bg-indigo-600 px-1.5 py-0.5 mr-1 text-white"><img src={CodeSvg} alt="svgCode" className='w-6'/></span>Nuestro Equipo</h2>
+                                </div>
+                                <div className="grid grid-cols-1 lg:grid-cols-2">
+                                    {/* Primera columna */}
+                                    <div className="group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg bg-slate-800 p-0.5 transition-all duration-500 hover:scale-[1.01] hover:bg-gradient-to-br from-indigo-200 via-indigo-200/0 to-indigo-200 mt-4">
+                                        <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] bg-slate-900 p-8 transition-colors duration-500 group-hover:bg-slate-800">
+                                            <img src={Backend} alt="imgBackend" className='w-60'/>
+                                            <h3 className='relative z-10 mb-1 w-full text-2xl font-bold text-slate-50 text-center'>William Postillos</h3>
+                                            <h4 className='relative z-10 mb-4 w-full text-1xl font-bold text-red-500 text-center uppercase'>Backend</h4>
+                                            <p className='relative z-10 text-slate-400'>Responsable de la gestión del proceso de visitas al campus y de la administración de cuentas de usuarios.</p>
+                                        </div>
+                                    </div>
+                                    {/* Segunda columna */}
+                                    <div className="group relative mx-auto w-full max-w-sm overflow-hidden rounded-lg bg-slate-800 p-0.5 transition-all duration-500 hover:scale-[1.01] hover:bg-slate-800/50 hover:bg-gradient-to-br from-indigo-200 via-indigo-200/0 to-indigo-200 mt-4 ">
+                                        <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] bg-slate-900 p-8 transition-colors duration-500 group-hover:bg-slate-800">
+                                            <img src={Frontend} alt="imgFrontend" className='w-60'/>
+                                            <h3 className='relative z-10 mb-1 w-full text-2xl font-bold text-slate-50 text-center'>Benjamín Veli</h3>
+                                            <h4 className='relative z-10 mb-4 w-full text-1xl font-bold text-red-500 text-center uppercase'>Frontend</h4>
+                                            <p className='relative z-10 text-slate-400'>Responsable de la maquetación, la experiencia del usuario, la interactividad y la creación del sitio web.</p>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </section>
                     </main>
