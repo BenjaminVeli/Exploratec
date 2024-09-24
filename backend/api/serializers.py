@@ -42,7 +42,5 @@ class NoteSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Se ha alcanzado el límite de formularios aceptados.")
         return attrs
 
-    def create(self, validated_data):
-        return super().create(validated_data)
     
     

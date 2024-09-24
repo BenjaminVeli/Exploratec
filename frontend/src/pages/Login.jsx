@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
 import { ACCESS_TOKEN, REFRESH_TOKEN } from "../constants";
 import { loginSchema } from "../schemas/auth";
@@ -87,7 +87,7 @@ function Login() {
                             </div>
                         }
                         <div className="signin">
-                        <span>No tienes una cuenta?<a href="register">Regístrate</a></span>
+                        <span>No tienes una cuenta?<Link to="/register">Regístrate</Link></span>
                         </div>
                     </div>
                     </div>

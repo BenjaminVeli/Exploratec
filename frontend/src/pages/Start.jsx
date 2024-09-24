@@ -55,7 +55,7 @@ const Start = () => {
                     <main>
                         <section id="main-entrance" className="w-full">
                             <div className="container mx-auto">
-                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+                                <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 items-center">
                                     {/* Primera columna  */}
                                     <div className="text-left">
                                         <Reveal>
@@ -68,7 +68,7 @@ const Start = () => {
                                     {/* Segunda columna  */}
                                     <div className="flex justify-center items-center md:my-0 my-6">
                                         <Reveal>
-                                            <img src={Logo360Img} alt="Logo360°" className="bouncing-image w-24 md:w-36 lg:w-48 xl:w-60" />
+                                            <img src={Logo360Img} alt="Logo360°" className="bouncing-image w-24 md:w-36 lg:w-48 xl:w-60 py-10" />
                                         </Reveal>
                                     </div>
                                 </div>
@@ -101,7 +101,7 @@ const Start = () => {
                                             whileInView={"show"}
                                             viewport={{ once: true, amount: 0.2 }}
                                             key={d.id} className="flex justify-center items-center p-5"> 
-                                            <div className="w-64 bg-white rounded-3xl border border-gray-300 overflow-hidden mb-5 hover:scale-105 transition-all duration-500">
+                                            <div className="w-64 bg-white rounded-3xl border border-gray-300 overflow-hidden mb-5 hover:scale-105 transition-all duration-500 shadow-2xl">
                                                 <img className="w-full" src={d.img} alt={d.alt} />
                                                 <div className="p-5">
                                                     <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-800">{d.textH3}<span className="text-tecsup">{d.textSpan}</span></h3>
@@ -138,8 +138,8 @@ const Start = () => {
                                     whileInView={"show"}
                                     viewport={{ once: true, amount: 0.3 }}
                                     className="grid grid-cols-2 gap-4 mt-8">
-                                    <img src={VisitImg} alt="VisitTecsup" className="w-full rounded-lg" />
-                                    <img src={AdverstingImg} alt="AdverstingTecsup" className="mt-4 w-full lg:mt-10 rounded-lg" />
+                                    <img src={VisitImg} alt="VisitTecsup" className="w-full rounded-lg  hover:scale-105 transition-all duration-500 shadow-2xl" />
+                                    <img src={AdverstingImg} alt="AdverstingTecsup" className="mt-4 w-full lg:mt-10 rounded-lg  hover:scale-105 transition-all duration-500 shadow-2xl" />
                                 </motion.div>
                             </div>
                         </section>
