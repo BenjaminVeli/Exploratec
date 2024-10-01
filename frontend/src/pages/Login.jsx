@@ -60,9 +60,9 @@ function Login() {
             <Header />
             <div className="container main">
                 <form className="row" onSubmit={handleSubmit}>
-                    <div className="col-md-6 side-image--login">
+                    <div className="col-md-6 side-image-login">
                     <div className="text">
-                        <p>EXPLORATEC</p>
+                        <p className="uppercase">Exploratec</p>
                     </div>
                     </div>
 

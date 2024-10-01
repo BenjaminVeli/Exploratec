@@ -279,7 +279,7 @@ span a:hover{
 
 /* ---------------------- Authentication Styles ---------------------- */
 
-.side-image--register{
+.side-image-register{
     background-image: url("/img/register.jpg");
     background-position: center;
     background-size: cover;
@@ -288,7 +288,7 @@ span a:hover{
     position: relative;
 }
 
-.side-image--login{
+.side-image-login{
     background-image: url("/img/login.jpg");
     background-position: center;
     background-size: cover;
@@ -297,7 +297,14 @@ span a:hover{
     position: relative;
 }
 
-
+.side-image-admin{
+  background-image: url("/img/admin.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  border-radius: 10px 0 0 10px;
+  position: relative;
+}
 
 .message-error-layout{
   border: 1px solid var(--errorMessage);

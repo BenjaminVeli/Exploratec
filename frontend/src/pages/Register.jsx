@@ -56,9 +56,9 @@ function Register(){
             <Header />
             <div className="container main">
                 <form className="row" onSubmit={handleSubmit}> 
-                    <div className="col-md-6 side-image--register">
+                    <div className="col-md-6 side-image-register">
                     <div className="text">
-                        <p>EXPLORATEC</p>
+                        <p className="uppercase">Exploratec</p>
                     </div>
                     </div>
 

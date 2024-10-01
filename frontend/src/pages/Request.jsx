@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import api from "../api";
 
-import HeaderAuth from "../components/Header-auth";
+import Header from "../components/Header";
 import Note from "../components/Note";
 
 const Request = () =>{
@@ -37,7 +37,7 @@ const Request = () =>{
 
     return (
         <div>
-            <HeaderAuth />
+            <Header />
                     
                 {notes.map((note) => (
                     <Note note={note} onDelete={deleteNote} key={note.id} />

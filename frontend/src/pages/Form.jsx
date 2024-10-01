@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../api";
-import HeaderAuth from "../components/Header-auth";
+import Header from "../components/Header";
 import MinusCircle from "../assets/svg/minus-circle.svg"
 import { formSchema } from "../schemas/auth";
 
@@ -114,7 +114,7 @@ function Form() {
 
   return (
     <div>
-      <HeaderAuth />
+      <Header />
 
       <div className="bg-gray-500 md:mt-0 mt-10">
         <div className="w-full lg:w-6/12 px-4 mx-auto flex items-center justify-center min-h-[100vh]">
