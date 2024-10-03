@@ -1,6 +1,6 @@
 from django.shortcuts import render
 from django.contrib.auth.models import User
-from rest_framework import generics
+from rest_framework import generics, status
 from .serializers import UserSerializer , SpecialtySerializer, NoteSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny
 from .models import Note, Specialty
@@ -19,6 +19,15 @@ class CurrentUserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
+
+class RequestListView(APIView):
+    serializer_class = NoteSerializer
+    permission_classes = [IsAuthenticated]
+
+    def get(self, request):
+        notes = Note.objects.all()
+        serializer = self.serializer_class(notes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
     
 class SpecialtyListCreate(generics.ListCreateAPIView):
     serializer_class = SpecialtySerializer

@@ -29,20 +29,24 @@ function AdminAuthentication() {
       const res = await api.post("/api/token/", { username, password });
       localStorage.setItem(ACCESS_TOKEN, res.data.access);
       localStorage.setItem(REFRESH_TOKEN, res.data.refresh);
-      toast.success("¡Inicio de sesión exitoso! Bienvenido.", {
-        position: "bottom-right",
-        autoClose: 2500,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
 
       const userResponse = await api.get("/api/current-user/");
       const user = userResponse.data;
+      
+      // Guardar la información del usuario en el localStorage
+      localStorage.setItem("current_user", JSON.stringify(user));
 
       if (user.is_staff) {
+        toast.success("¡Inicio de sesión exitoso! Bienvenido.", {
+          position: "bottom-right",
+          autoClose: 2500,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: undefined,
+        });
+
         setTimeout(() => {
           navigate("/admin-users-list");
         }, 2500);

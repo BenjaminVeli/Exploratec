@@ -19,6 +19,11 @@ function Logout() {
   return <Navigate to="/login" />
 }
 
+function LogoutAdmin() {
+  localStorage.clear()
+  return <Navigate to="/authentication-admin" />
+}
+
 function RegisterAndLogout() {
   localStorage.clear()
   return <Register />
@@ -32,6 +37,7 @@ function App() {
           <Route path="/register" element={<RegisterAndLogout />} />
           <Route path="/login" element={<Login />}></Route>
           <Route path="/logout" element={<Logout />} />
+          <Route path="/logout-admin" element={<LogoutAdmin />} />
           <Route path="/authentication-admin" element={<AdminAuthentication />}></Route>
           <Route path="/tour" element={<Tour />}></Route>
 

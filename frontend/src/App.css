@@ -951,6 +951,7 @@ p {
     overflow: hidden;
     font-size: 16px;
     text-transform: uppercase;
+    color: #292929;
   }
   a.menupanel.enlacesnavi::after {
     background-color: #00ffce;
