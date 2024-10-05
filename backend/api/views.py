@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.contrib.auth.models import User
 from rest_framework import generics, status
 from .serializers import UserSerializer , SpecialtySerializer, NoteSerializer
-from rest_framework.permissions import IsAuthenticated, AllowAny
+from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from .models import Note, Specialty
 from rest_framework.views import APIView
 from rest_framework.response import Response
@@ -20,15 +20,6 @@ class CurrentUserView(APIView):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
 
-class RequestListView(APIView):
-    serializer_class = NoteSerializer
-    permission_classes = [IsAuthenticated]
-
-    def get(self, request):
-        notes = Note.objects.all()
-        serializer = self.serializer_class(notes, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
-    
 class SpecialtyListCreate(generics.ListCreateAPIView):
     serializer_class = SpecialtySerializer
     permission_classes = [IsAuthenticated]
@@ -77,3 +68,38 @@ class SpecialtyStatsView(APIView):
             })
         
         return Response(all_stats)
+    
+
+# ------------------------- Request CRUD -------------------------
+
+class RequestListView(APIView):
+    serializer_class = NoteSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        notes = Note.objects.all()
+        serializer = self.serializer_class(notes, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class RequestListDelete(generics.DestroyAPIView):
+    queryset = Note.objects.all()  
+    serializer_class = NoteSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    
+class RequestListUpdate(generics.UpdateAPIView):
+    queryset = Note.objects.all()  # Define el conjunto de datos a actualizar
+    serializer_class = NoteSerializer  # Define el serializador
+    permission_classes = [IsAuthenticated, IsAdminUser]  # Define permisos
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)  # Si deseas actualizaciones parciales (PATCH), define `partial=True`
+        instance = self.get_object()  # Obtén la instancia del objeto que se va a actualizar
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)  # Valida los datos
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)  # Realiza la actualización
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def perform_update(self, serializer):
+        serializer.save()
+
+# -----------------------------------------------------------------

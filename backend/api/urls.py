@@ -9,6 +9,9 @@ urlpatterns = [
     
     
     path('request-list/', views.RequestListView.as_view(), name='request-list'),
+    path('request-delete/<int:pk>/', views.RequestListDelete.as_view(), name='request-list'),
+    path('request-update/<int:pk>/', views.RequestListUpdate.as_view(), name='request-update'),
+    
     
     path('current-user/', views.CurrentUserView.as_view(), name='current-user'),
 ]

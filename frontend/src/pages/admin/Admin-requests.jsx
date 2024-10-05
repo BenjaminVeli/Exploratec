@@ -1,12 +1,18 @@
 import { useState, useEffect } from 'react';
 import { SquarePen, Trash2, Eye, Search } from 'lucide-react';
-import Header from "../../components/Header";
 import api from "../../api";
+
+import Header from "../../components/Header";
+import RequestDetailsModal from "../../components/admin/RequestDetailsModal";
+import RequestEditModal from '../../components/admin/RequestEditModal';
+import RequestDeleteModal from '../../components/admin/RequestDeleteModal';
 
 const AdminRequests = () => {
   const [requests, setRequests] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [recordsPerPage] = useState(9); // Número de registros por página
+  const [recordsPerPage] = useState(8);
+  const [selectedRequest, setSelectedRequest] = useState(null);
+  const [modalType, setModalType] = useState(null); // 'view' para ver detalles, 'edit' para editar
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -17,20 +23,58 @@ const AdminRequests = () => {
         console.error('Error al obtener las solicitudes:', error);
       }
     };
-  
     fetchRequests(); 
   }, []);
 
-  // Calcular los índices de los registros a mostrar
+
+
+  const deleteRequest = async (id) => {
+    try {
+      await api.delete(`/api/request-delete/${id}/`);
+      // Filtra las solicitudes después de eliminar la nota
+      setRequests(requests.filter((request) => request.id !== id));
+      closeModal();
+    } catch (error) {
+      console.error('Error al eliminar la solicitud:', error);
+    }
+  };
+
+  const updateRequest = async (updatedRequest) => {
+    try {
+      // Realiza la solicitud PATCH para actualizar la solicitud
+      await api.patch(`/api/request-update/${updatedRequest.id}/`, updatedRequest);
+      // Actualiza la lista de solicitudes
+      setRequests((prevRequests) => 
+        prevRequests.map((request) => 
+          request.id === updatedRequest.id ? { ...request, ...updatedRequest } : request
+        )
+      );
+      // Cierra el modal después de la actualización
+      closeModal();
+    } catch (error) {
+      console.error('Error al actualizar la solicitud:', error);
+    }
+  };
+
+
   const indexOfLastRequest = currentPage * recordsPerPage;
   const indexOfFirstRequest = indexOfLastRequest - recordsPerPage;
   const currentRequests = requests.slice(indexOfFirstRequest, indexOfLastRequest);
 
-  // Cambiar de página
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
-  // Calcular el total de páginas
   const totalPages = Math.ceil(requests.length / recordsPerPage);
+
+  // Abrir modal
+  const openModal = (request, type) => {
+    setSelectedRequest(request); // Almacena la solicitud seleccionada
+    setModalType(type); // Define qué tipo de modal abrir
+  };
+
+  // Cerrar modal
+  const closeModal = () => {
+    setSelectedRequest(null);
+    setModalType(null); // Limpia el tipo de modal
+  };
 
   return (
     <div>
@@ -43,12 +87,10 @@ const AdminRequests = () => {
                 <h2 className="text-center text-2xl font-bold md:text-4xl">Request Administration</h2>
               </div>
               <div className="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 pb-4">  
-                
-              <div className="flex px-4 py-2 items-center border-2 border-gray-300 rounded-lg">
-                <input placeholder="Type name to search" className="outline-none text-sm"/>
-                {<Search size={16} className=""/>}
-              </div>
-
+                <div className="flex px-4 py-2 items-center border-2 border-gray-300 rounded-lg">
+                  <input placeholder="Type name to search" className="outline-none text-sm" />
+                  <Search size={16} />
+                </div>
               </div>
               <div className="overflow-x-auto">
                 <table className="w-full text-sm text-center text-gray-500 dark:text-gray-400">
@@ -70,9 +112,43 @@ const AdminRequests = () => {
                         <td className="px-4 py-3 font-medium whitespace-nowrap text-stone-900">{request.phone}</td>
                         <td className="px-4 py-3 font-medium whitespace-nowrap text-stone-900">
                           <div className="flex items-center justify-center space-x-4">
-                            <button className="py-2 px-3 flex items-center text-sm font-medium text-center border border-yellow-700 rounded-lg text-yellow-700 hover:text-white bg-transparent hover:bg-yellow-700 transition-all duration-500">{<Eye size={15} className="mr-2"/>}Read</button>
-                            <button className="py-2 px-3 flex items-center text-sm font-medium text-center border border-blue-700 rounded-lg text-blue-700 hover:text-white bg-transparent hover:bg-blue-700 transition-all duration-500">{<SquarePen size={15} className="mr-2"/>}Edit</button>
-                            <button className="py-2 px-3 flex items-center text-sm font-medium text-center border border-red-700 rounded-lg text-red-700 hover:text-white bg-transparent hover:bg-red-700 transition-all duration-500">{<Trash2 size={15} className="mr-2"/>}Delete</button>
+                            {/* Botón para abrir modal de detalles */}
+                            <button
+                              onClick={() => openModal(request, 'view')}
+                              className="py-2 px-3 flex items-center text-sm font-medium text-center border border-yellow-700 rounded-lg text-yellow-700 hover:text-white bg-transparent hover:bg-yellow-700 transition-all duration-500"
+                            >
+                              <Eye size={15} className="mr-2" /> Read
+                            </button>
+
+                            {modalType === 'view' && selectedRequest && (
+                              <RequestDetailsModal request={selectedRequest} closeRequestDetailsModal={closeModal} />
+                            )}
+
+
+
+                            {/* Botón para abrir modal de edición */}
+                            <button
+                              onClick={() => openModal(request, 'edit')}
+                              className="py-2 px-3 flex items-center text-sm font-medium text-center border border-blue-700 rounded-lg text-blue-700 hover:text-white bg-transparent hover:bg-blue-700 transition-all duration-500"
+                            >
+                              <SquarePen size={15} className="mr-2" /> Edit
+                            </button>
+
+                            {modalType === 'edit' && selectedRequest && (
+                              <RequestEditModal request={selectedRequest} closeRequestEditModal={closeModal} onRequestUpdated={updateRequest}/>
+                            )}
+
+
+
+                            <button onClick={() => openModal(request, 'delete')} className="py-2 px-3 flex items-center text-sm font-medium text-center border border-red-700 rounded-lg text-red-700 hover:text-white bg-transparent hover:bg-red-700 transition-all duration-500">
+                              <Trash2 size={15} className="mr-2" /> Delete
+                            </button>
+                            
+                            {modalType === 'delete' && selectedRequest && (
+                              <RequestDeleteModal requestId={selectedRequest.id} deleteRequest={deleteRequest} closeRequestDeleteModal={closeModal}/>
+                            )}
+                            
+
                           </div>
                         </td>
                       </tr>
@@ -98,7 +174,6 @@ const AdminRequests = () => {
                   </ul>
                 </nav>
               </div>
-
             </div>
           ) : (
             <p>No se encontraron resultados.</p>

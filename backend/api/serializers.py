@@ -27,7 +27,6 @@ class NoteSerializer(serializers.ModelSerializer):
     
     def get_created_at(self, obj):
         return obj.created_at.strftime("%d/%m/%Y")
-
     
     def validate(self, attrs):
         attrs = super().validate(attrs)
