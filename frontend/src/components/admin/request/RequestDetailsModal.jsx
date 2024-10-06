@@ -20,9 +20,9 @@ const RequestDetailsModal = ({ request, closeRequestDetailsModal }) => {
 
           
           {request.is_accepted ? (
-            <p className="text-white">La solicitud de visita fue aceptada.</p> 
+            <p className="text-white">The visit request was accepted.</p> 
           ): (
-            <p className="text-white">La solicitud de visita esta en espera.</p> 
+            <p className="text-white">The visit request is pending.</p> 
           )}
 
         </div>

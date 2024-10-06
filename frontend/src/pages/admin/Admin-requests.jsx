@@ -3,9 +3,12 @@ import { SquarePen, Trash2, Eye, Search } from 'lucide-react';
 import api from "../../api";
 
 import Header from "../../components/Header";
-import RequestDetailsModal from "../../components/admin/RequestDetailsModal";
-import RequestEditModal from '../../components/admin/RequestEditModal';
-import RequestDeleteModal from '../../components/admin/RequestDeleteModal';
+import RequestDetailsModal from "../../components/admin/request/RequestDetailsModal";
+import RequestEditModal from '../../components/admin/request/RequestEditModal';
+import RequestDeleteModal from '../../components/admin/request/RequestDeleteModal';
+
+
+
 
 const AdminRequests = () => {
   const [requests, setRequests] = useState([]);
@@ -13,6 +16,13 @@ const AdminRequests = () => {
   const [recordsPerPage] = useState(8);
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [modalType, setModalType] = useState(null); // 'view' para ver detalles, 'edit' para editar
+
+  const indexOfLastRequest = currentPage * recordsPerPage;
+  const indexOfFirstRequest = indexOfLastRequest - recordsPerPage;
+  const currentRequests = requests.slice(indexOfFirstRequest, indexOfLastRequest);
+
+  const paginate = (pageNumber) => setCurrentPage(pageNumber);
+  const totalPages = Math.ceil(requests.length / recordsPerPage);
 
   useEffect(() => {
     const fetchRequests = async () => {
@@ -25,8 +35,6 @@ const AdminRequests = () => {
     };
     fetchRequests(); 
   }, []);
-
-
 
   const deleteRequest = async (id) => {
     try {
@@ -55,14 +63,6 @@ const AdminRequests = () => {
       console.error('Error al actualizar la solicitud:', error);
     }
   };
-
-
-  const indexOfLastRequest = currentPage * recordsPerPage;
-  const indexOfFirstRequest = indexOfLastRequest - recordsPerPage;
-  const currentRequests = requests.slice(indexOfFirstRequest, indexOfLastRequest);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
-  const totalPages = Math.ceil(requests.length / recordsPerPage);
 
   // Abrir modal
   const openModal = (request, type) => {

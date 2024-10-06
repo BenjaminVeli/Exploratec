@@ -102,4 +102,29 @@ class RequestListUpdate(generics.UpdateAPIView):
     def perform_update(self, serializer):
         serializer.save()
 
-# -----------------------------------------------------------------
+# ------------------------- User CRUD -------------------------
+
+class UserListView(APIView):
+    serializer_class = UserSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        users = User.objects.all()
+        serializer = self.serializer_class(users, many=True)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+    
+class UserListUpdate(generics.UpdateAPIView):
+    queryset = User.objects.all()  # Define el conjunto de datos a actualizar
+    serializer_class = UserSerializer  # Define el serializador
+    permission_classes = [IsAuthenticated, IsAdminUser]  # Define permisos
+
+    def update(self, request, *args, **kwargs):
+        partial = kwargs.pop('partial', False)  # Si deseas actualizaciones parciales (PATCH), define `partial=True`
+        instance = self.get_object()  # Obtén la instancia del objeto que se va a actualizar
+        serializer = self.get_serializer(instance, data=request.data, partial=partial)  # Valida los datos
+        serializer.is_valid(raise_exception=True)
+        self.perform_update(serializer)  # Realiza la actualización
+        return Response(serializer.data, status=status.HTTP_200_OK)
+
+    def perform_update(self, serializer):
+        serializer.save()
