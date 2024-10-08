@@ -6,7 +6,8 @@ from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
 from .models import Note, Specialty
 from rest_framework.views import APIView
 from rest_framework.response import Response
-from django.db.models import Count
+from django.db.models import Count , Q
+from rest_framework.pagination import PageNumberPagination
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -72,14 +73,27 @@ class SpecialtyStatsView(APIView):
 
 # ------------------------- Request CRUD -------------------------
 
+class RequestPagination(PageNumberPagination):
+    page_size = 8  # El número de solicitudes por página (alínealo con React)
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
 class RequestListView(APIView):
     serializer_class = NoteSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+    pagination_class = RequestPagination
 
     def get(self, request):
-        notes = Note.objects.all()
-        serializer = self.serializer_class(notes, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        search_query = request.GET.get('search', '')  # Obtén el query de búsqueda
+        notes = Note.objects.filter(
+            Q(name__icontains=search_query) | Q(lastname__icontains=search_query)  # Filtro de búsqueda
+        )
+        
+        # Paginación
+        paginator = RequestPagination()
+        result_page = paginator.paginate_queryset(notes, request)
+        serializer = self.serializer_class(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
     
 class RequestListDelete(generics.DestroyAPIView):
     queryset = Note.objects.all()  
@@ -104,14 +118,29 @@ class RequestListUpdate(generics.UpdateAPIView):
 
 # ------------------------- User CRUD -------------------------
 
+class UserPagination(PageNumberPagination):
+    page_size = 8  # El número de usuarios por página (alínealo con React)
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+
 class UserListView(APIView):
     serializer_class = UserSerializer
     permission_classes = [IsAuthenticated, IsAdminUser]
+    pagination_class = UserPagination
 
     def get(self, request):
-        users = User.objects.all()
-        serializer = self.serializer_class(users, many=True)
-        return Response(serializer.data, status=status.HTTP_200_OK)
+        search_query = request.GET.get('search', '')  # Obtén el query de búsqueda
+        users = User.objects.filter(
+            Q(is_superuser=False, is_staff=False),  # Excluye superusers y staff
+            Q(username__icontains=search_query) | Q(email__icontains=search_query)  # Filtro de búsqueda
+        )
+
+        # Paginación
+        paginator = UserPagination()
+        result_page = paginator.paginate_queryset(users, request)
+        serializer = self.serializer_class(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
     
 class UserListUpdate(generics.UpdateAPIView):
     queryset = User.objects.all()  # Define el conjunto de datos a actualizar
