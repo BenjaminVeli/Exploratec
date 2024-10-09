@@ -40,7 +40,7 @@ function Form() {
 
   const getNotes = () => {
     api
-        .get("/api/notes/")
+        .get("/api/note-list/")
         .then((res) => res.data)
         .then((data) => {
             setNotes(data);
@@ -52,7 +52,7 @@ function Form() {
 
   const createNote = () => {
     api
-      .post("/api/notes/", {
+      .post("/api/note-create/", {
         name,
         lastname,
         dni,

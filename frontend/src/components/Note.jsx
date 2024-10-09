@@ -1,12 +1,14 @@
-import {useState} from 'react'
+import {useState, useRef} from 'react'
 import html2canvas from 'html2canvas';
 import jsPDF from 'jspdf';
 
 const Note = ({ note, onDelete }) => {
  
   const [loader, setLoader] = useState(false); 
+  const noteRef = useRef(null);
+
   const downloadPDF = () => {
-    const capture = document.querySelector('.div-note');
+    const capture = noteRef.current; // Obtener el div específico de la nota
     capture.classList.add('pdf-capture'); // Añadir la clase para la captura
     setLoader(true);
 
@@ -42,7 +44,7 @@ const Note = ({ note, onDelete }) => {
     });
 };
     return (
-      <div className='div-note md:mt-0 mt-12'>
+      <div className='div-note md:mt-0 mt-12' ref={noteRef}>
         <div className="w-full lg:w-6/12 px-4 mx-auto flex items-center justify-center min-h-[100vh]">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
             <div className="rounded-t bg-slate-900 mb-0 px-6 py-6">
@@ -95,7 +97,7 @@ const Note = ({ note, onDelete }) => {
                       <label className="block uppercase text-blueGray-600 text-xs font-bold mb-2" htmlFor="especialidad">
                         Especialidad
                       </label>
-                      <p className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">{note.specialty}</p>
+                      <p className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150">{note.specialty.name}</p>
                     </div>
                   </div>
                   <div className="w-full lg:w-6/12 px-4">

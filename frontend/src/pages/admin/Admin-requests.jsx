@@ -20,8 +20,8 @@ const AdminRequests = () => {
   const [selectedRequest, setSelectedRequest] = useState(null);
   const [modalType, setModalType] = useState(null); // 'view' para ver detalles, 'edit' para editar
 
-  const fetchRequests = async (page = 1) => {
-    try{
+  const fetchRequests = useCallback(async (page = 1) => {
+    try {
       const response = await api.get('/api/request-list/', {
         params: {
           page,
@@ -34,11 +34,11 @@ const AdminRequests = () => {
     } catch (error) {
       console.error('Error getting requests:', error);
     }
-  };
-
+  }, [recordsPerPage, searchQuery]);
+  
   useEffect(() => {
     fetchRequests(currentPage);
-  }, [currentPage, searchQuery]);
+  }, [currentPage, fetchRequests]);
 
   const handleSearchChange = useCallback(
     debounce((value) => {
@@ -104,8 +104,8 @@ const AdminRequests = () => {
                 <h2 className="text-center text-2xl font-bold md:text-4xl text-slate-900">Request Administration</h2>
               </div>
               <div className="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 pb-4">  
-                <div className="flex px-4 py-2 items-center border-2 border-gray-300 rounded-lg">
-                  <input placeholder="Type name to search" className="outline-none text-sm" value={searchQuery} onChange={onSearchInputChange}/>
+                <div className="flex px-4 py-2 items-center border-2 border-gray-300 rounded-lg w-80">
+                  <input placeholder="Type a name or last name to search" className="outline-none text-sm w-full" value={searchQuery} onChange={onSearchInputChange}/>
                   <Search size={16} />
                 </div>
               </div>

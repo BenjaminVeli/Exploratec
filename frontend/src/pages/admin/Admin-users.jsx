@@ -17,7 +17,7 @@ const AdminUsers = () => {
   const [selectedUser, setSelectedUser] = useState(null);
   const [modalType, setModalType] = useState(null);
 
-  const fetchUsers = async (page = 1) => {
+  const fetchUsers = useCallback(async (page = 1) => {
     try {
       const response = await api.get('/api/user-list/', {
         params: {
@@ -31,11 +31,11 @@ const AdminUsers = () => {
     } catch (error) {
       console.error('Error getting users:', error);
     }
-  };
+  }, [recordsPerPage, searchQuery]);
 
   useEffect(() => {
     fetchUsers(currentPage);
-  }, [currentPage, searchQuery]);
+  }, [currentPage, fetchUsers]);
 
   const handleSearchChange = useCallback(
     debounce((value) => {
@@ -85,8 +85,8 @@ const AdminUsers = () => {
               <h2 className="text-center text-2xl font-bold md:text-4xl text-slate-900">User Administration</h2>
             </div>
             <div className="flex flex-col md:flex-row items-stretch md:items-center md:space-x-3 space-y-3 md:space-y-0 justify-between mx-4 pb-4">  
-              <div className="flex px-4 py-2 items-center border-2 border-gray-300 rounded-lg">
-                <input placeholder="Type name to search" className="outline-none text-sm" value={searchQuery} onChange={onSearchInputChange} />
+              <div className="flex px-4 py-2 items-center border-2 border-gray-300 rounded-lg w-80">
+                <input placeholder="Type a username or email to search" className="outline-none text-sm w-full" value={searchQuery} onChange={onSearchInputChange} />
                 <Search size={16} />
               </div>
             </div>

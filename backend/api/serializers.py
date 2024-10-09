@@ -16,15 +16,18 @@ class SpecialtySerializer(serializers.ModelSerializer):
     class Meta:
         model = Specialty
         fields = ["id", "name"]
-        
+
+
+
 class NoteSerializer(serializers.ModelSerializer):
     created_at = serializers.SerializerMethodField()
-            
+    # specialty = SpecialtySerializer(read_only=True)  # Mostrar el nombre de la especialidad
+
     class Meta:
         model = Note
         fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
         extra_kwargs = {"author": {"read_only": True}}
-    
+
     def get_created_at(self, obj):
         return obj.created_at.strftime("%d/%m/%Y")
     
@@ -41,5 +44,12 @@ class NoteSerializer(serializers.ModelSerializer):
             raise serializers.ValidationError("Se ha alcanzado el límite de formularios aceptados.")
         return attrs
 
+class NoteListSerializer(serializers.ModelSerializer):
+    specialty = SpecialtySerializer(read_only=True)
+    
+    class Meta:
+        model = Note
+        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
+        extra_kwargs = {"author": {"read_only": True}}
     
     

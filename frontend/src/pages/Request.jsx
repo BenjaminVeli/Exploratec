@@ -13,7 +13,7 @@ const Request = () =>{
 
     const getNotes = () => {
         api
-            .get("/api/notes/")
+            .get("/api/note-list/")
             .then((res) => res.data)
             .then((data) => {
                 setNotes(data);
