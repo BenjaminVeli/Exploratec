@@ -83,7 +83,7 @@ const Start = () => {
                             </div>
                         </section>
 
-                        <section id="explore" className="py-28">
+                        <section id="explore" className="py-28 bg-white dark:bg-neutral-900">
                             <div className="container">
                                 <motion.div 
                                     variants={fadeIn("up", 0.2)}
@@ -91,7 +91,7 @@ const Start = () => {
                                     whileInView={"show"}
                                     viewport={{ once: true, amount: 0.7 }}
                                     className="text-center">
-                                    <h2 className='text-4xl font-bold py-3'>En este recorrido virtual <span className="text-tecsup">conocerás.</span></h2>
+                                    <h2 className='text-4xl font-bold py-3 text-black dark:text-white'>En este recorrido virtual <span className="text-tecsup">conocerás.</span></h2>
                                 </motion.div>
                                 <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4">
                                     {data.map((d) => (
@@ -101,7 +101,7 @@ const Start = () => {
                                             whileInView={"show"}
                                             viewport={{ once: true, amount: 0.2 }}
                                             key={d.id} className="flex justify-center items-center p-5"> 
-                                            <div className="w-64 bg-white rounded-3xl border border-gray-300 overflow-hidden mb-5 hover:scale-105 transition-all duration-500 shadow-2xl">
+                                            <div className="w-64 bg-white dark:bg-neutral-950 rounded-3xl border border-gray-300 dark:border-neutral-950 overflow-hidden mb-5 hover:scale-105 transition-all duration-500 shadow-2xl">
                                                 <img className="w-full" src={d.img} alt={d.alt} />
                                                 <div className="p-5">
                                                     <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-800">{d.textH3}<span className="text-tecsup">{d.textSpan}</span></h3>
@@ -117,7 +117,7 @@ const Start = () => {
                             <img src={TecsuImg} alt="TecsupLima" className='w-full' />
                         </section>
 
-                        <section id="information" className="py-16">
+                        <section id="information" className="py-16 bg-white dark:bg-neutral-900">
                             <div className="gap-16 items-center py-8 px-4 mx-auto max-w-screen-xl lg:grid lg:grid-cols-2 lg:py-16 lg:px-6">
                                 <motion.div 
                                     variants={fadeIn("right", 0.3)}
@@ -125,7 +125,7 @@ const Start = () => {
                                     whileInView={"show"}
                                     viewport={{ once: true, amount: 0.3 }}
                                     className="font-light text-gray-500 sm:text-lg dark:text-gray-400">
-                                    <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-black">
+                                    <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-black dark:text-white">
                                         ¿Te gustaría participar en una visita guiada en persona?
                                     </h2>
                                     <p className="mb-4 font-medium">
@@ -144,7 +144,7 @@ const Start = () => {
                             </div>
                         </section>
 
-                        <section id="statistics" className="py-20 bg-neutral-900">
+                        <section id="statistics" className="py-20 bg-neutral-900 dark:bg-neutral-950">
                             <div className="container">
                                 <div className="bg-glass">
                                     <div className="mb-10 mt-10 flex flex-col items-center">
@@ -154,11 +154,6 @@ const Start = () => {
                                         experiencias más personalizadas y relevantes durante las visitas.</p>
                                     </div>
         
-
-
-
-
-
 
                                     <Statistics />
                                 </div>    

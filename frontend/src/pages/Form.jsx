@@ -116,7 +116,7 @@ function Form() {
     <div>
       <Header />
 
-      <div className="bg-gray-500 md:mt-0 mt-10">
+      <div className="bg-gray-500 md:pt-20 pt-24 lg:pt-4">
         <div className="w-full lg:w-6/12 px-4 mx-auto flex items-center justify-center min-h-[100vh]">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
             <div className="rounded-t bg-slate-900 mb-0 px-6 py-6">

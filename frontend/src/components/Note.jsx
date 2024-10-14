@@ -44,7 +44,7 @@ const Note = ({ note, onDelete }) => {
     });
 };
     return (
-      <div className='div-note md:mt-0 mt-12' ref={noteRef}>
+      <div className='div-note md:mt-0 mt-12 bg-white dark:bg-neutral-900' ref={noteRef}>
         <div className="w-full lg:w-6/12 px-4 mx-auto flex items-center justify-center min-h-[100vh]">
           <div className="relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded-lg bg-blueGray-100 border-0">
             <div className="rounded-t bg-slate-900 mb-0 px-6 py-6">

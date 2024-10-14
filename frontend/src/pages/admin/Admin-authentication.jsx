@@ -65,9 +65,9 @@ function AdminAuthentication() {
   };
 
   return (
-    <div className="authentications">
+    <div className="authentications bg-neutral-900">
       <div className="container main">
-        <form className="row" onSubmit={handleSubmit}>
+        <form className="row bg-white" onSubmit={handleSubmit}>
           <div className="col-md-6 side-image-admin">
             <div className="text">
               <p className="uppercase">Exploratec</p>

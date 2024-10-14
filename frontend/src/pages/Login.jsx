@@ -56,10 +56,10 @@ function Login() {
     };
 
     return (
-        <div className="authentications">
+        <div className="authentications bg-gray-300 dark:bg-neutral-900">
             <Header />
             <div className="container main">
-                <form className="row" onSubmit={handleSubmit}>
+                <form className="row bg-white dark:bg-neutral-950" onSubmit={handleSubmit}>
                     <div className="col-md-6 side-image-login">
                     <div className="text">
                         <p className="uppercase">Exploratec</p>
@@ -69,15 +69,15 @@ function Login() {
                     <div className="col-md-6 right">
                     <div className="input-box">
                         <h2>Iniciar sesión</h2>
-                        <div className="input-field">
+                        <div className="input-field text-gray-950 dark:text-white">
                         <input type="text" className="input" required value={username} onChange={(e) => setUsername(e.target.value)}/>
                         <label>Usuario</label>
                         </div>
-                        <div className="input-field">
+                        <div className="input-field text-gray-950 dark:text-white">
                         <input type="password" className="input" required value={password} onChange={(e) => setPassword(e.target.value)}/>
                         <label>Contraseña</label>
                         </div>
-                        <div className="input-field">
+                        <div className="input-field ">
                         <button className="submit" type="submit">Ingresar</button>
                         </div>
                         {errorMessage && 
@@ -87,7 +87,7 @@ function Login() {
                             </div>
                         }
                         <div className="signin">
-                        <span>No tienes una cuenta?<Link to="/register">Regístrate</Link></span>
+                        <span className="text-gray-950 dark:text-white">No tienes una cuenta?<Link to="/register" className="ml-2">Regístrate</Link></span>
                         </div>
                     </div>
                     </div>

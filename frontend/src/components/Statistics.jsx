@@ -98,8 +98,8 @@ const Statistics = () => {
                                 <tbody className="min-w-full divide-y divide-neutral-700">
                                 {stats.map((stat, index) => (
                                     <tr key={index} className="">
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  dark:text-neutral-200">{stat.specialty__name}</td>
-                                        <td className="px-6 py-4 whitespace-nowrap text-sm dark:text-neutral-200 text-center">{stat.total}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm font-medium  text-white">{stat.specialty__name}</td>
+                                        <td className="px-6 py-4 whitespace-nowrap text-sm text-white text-center">{stat.total}</td>
                                     </tr>
                                 ))}
                                 </tbody>

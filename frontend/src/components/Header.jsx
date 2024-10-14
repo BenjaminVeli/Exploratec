@@ -1,14 +1,15 @@
 import useMenuToggle from '../hooks/useMenuToggle';
+import { useState, useEffect } from "react";
 import { Link } from 'react-router-dom';
 import ExploratecImg from '../assets/img/ExploraTec.png';
 import { ACCESS_TOKEN } from "../constants";
 
-const  Header = () => {
+const Header = () => {
+  const [theme, setTheme] = useState(localStorage.getItem('theme') || 'light');
   const { toggleRef, controlPanelRef } = useMenuToggle();
 
   const accessToken = localStorage.getItem(ACCESS_TOKEN);
 
-  // Función para verificar si el usuario es administrador
   const isAdmin = () => {
     const user = JSON.parse(localStorage.getItem('current_user'));
     return user && user.is_staff;
@@ -16,9 +17,23 @@ const  Header = () => {
 
   const isAuthenticated = !!accessToken;
 
+  const toggleTheme = () => {
+    const updatedTheme = theme === 'light' ? 'dark' : 'light';
+    setTheme(updatedTheme);
+    localStorage.setItem('theme', updatedTheme);
+  }
+
+  useEffect(() => {
+    if (theme === 'dark') {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+  }, [theme]);
+
   return (
     <div>
-      <header className="seccion header" id="header">
+      <header className={`seccion header ${theme}`} id="header">
         <div className="navwrapper" id="navwrapper">
           <nav className="nav">
             <div className="logo__tecsup">
@@ -30,8 +45,6 @@ const  Header = () => {
             </div>
             <div className="navigators">
               <div className="navigators__container">
-
-                {/* Usuario sin autenticación */}
                 {!isAuthenticated && (
                   <>
                     <Link to="/" className="enlace menu enlacesnavi">Inicio</Link>
@@ -39,8 +52,6 @@ const  Header = () => {
                     <Link to="/register" className="enlace menu enlacesnavi">Regístrate</Link>
                   </>
                 )}
-
-                {/* Menú para administrador autenticado */}
                 {isAuthenticated && isAdmin() && (
                   <>
                     <Link to="/admin-requests-list" className="enlace menu enlacesnavi">Request List</Link>
@@ -48,8 +59,6 @@ const  Header = () => {
                     <Link to="/logout-admin" className="enlace menu enlacesnavi">Logout</Link>
                   </>
                 )}
-
-                {/* Menú para usuario autenticado */}
                 {isAuthenticated && !isAdmin() && (
                   <>
                     <Link to="/request" className="enlace menu enlacesnavi">Solicitud</Link>
@@ -57,7 +66,9 @@ const  Header = () => {
                     <Link to="/logout" className="enlace menu enlacesnavi">Cerrar sesión</Link>
                   </>
                 )}
-
+                <div id="dark-btn" className={`dark-btn ${theme === 'dark' ? 'dark-btn-on' : ''}`} onClick={toggleTheme}>
+                  <span></span>
+                </div>
               </div>
             </div>
             <div className="btn__menu" id="hamburguesa" ref={toggleRef}>
@@ -68,10 +79,8 @@ const  Header = () => {
         <div className="panel_de_control" id="panelControl" ref={controlPanelRef}>
           <div className="panel_content">
             <div className="menu__section">
-              <h1 className="menu_titulo">Menú</h1>
+              <h2 className="menu_titulo">Menú</h2>
               <div className="panel__navegadores menu">
-
-                {/* Usuario sin autenticación */}
                 {!isAuthenticated && (
                   <>
                     <Link to="/" className="menu menupanel enlace enlacesnavi">Inicio</Link>
@@ -79,25 +88,20 @@ const  Header = () => {
                     <Link to="/register" className="menu menupanel enlace enlacesnavi">Regístrate</Link>
                   </>
                 )}
-
-                {/* Administrador autenticado */}
                 {isAuthenticated && isAdmin() && (
                   <>
                     <Link to="/admin-requests-list" className="menu menupanel enlace enlacesnavi">Request List</Link>
                     <Link to="/admin-users-list" className="menu menupanel enlace enlacesnavi">User List</Link>
-                    <Link to="/logout-admin" className="menu menupanel enlace enlacesnavi">Logout</Link> 
-                    </>
+                    <Link to="/logout-admin" className="menu menupanel enlace enlacesnavi">Logout</Link>
+                  </>
                 )}
-
-                {/* Usuario autenticado */}
                 {isAuthenticated && !isAdmin() && (
                   <>
                     <Link to="/request" className="menu menupanel enlace enlacesnavi">Solicitud</Link>
                     <Link to="/form" className="menu menupanel enlace enlacesnavi">Formulario</Link>
-                    <Link to="/logout" className="menu menupanel enlace enlacesnavi">Cerrar sesión</Link>                
+                    <Link to="/logout" className="menu menupanel enlace enlacesnavi">Cerrar sesión</Link>
                   </>
                 )}
-                
               </div>
             </div>
           </div>
