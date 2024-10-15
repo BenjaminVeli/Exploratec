@@ -32,7 +32,7 @@ const Header = () => {
   }, [theme]);
 
   return (
-    <div>
+    <>
       <header className={`seccion header ${theme}`} id="header">
         <div className="navwrapper" id="navwrapper">
           <nav className="nav">
@@ -63,6 +63,7 @@ const Header = () => {
                   <>
                     <Link to="/request" className="enlace menu enlacesnavi">Solicitud</Link>
                     <Link to="/form" className="enlace menu enlacesnavi">Formulario</Link>
+                    <Link to="/credentials" className="enlace menu enlacesnavi">Credenciales</Link>
                     <Link to="/logout" className="enlace menu enlacesnavi">Cerrar sesión</Link>
                   </>
                 )}
@@ -79,7 +80,12 @@ const Header = () => {
         <div className="panel_de_control" id="panelControl" ref={controlPanelRef}>
           <div className="panel_content">
             <div className="menu__section">
-              <h2 className="menu_titulo">Menú</h2>
+              <div className="menu_header">
+                <h2 className="menu_titulo">Menú</h2>
+                <div id="dark-btn" className={`dark-btn ${theme === 'dark' ? 'dark-btn-on' : ''}`} onClick={toggleTheme}>
+                    <span></span>
+                  </div>
+              </div>
               <div className="panel__navegadores menu">
                 {!isAuthenticated && (
                   <>
@@ -99,6 +105,7 @@ const Header = () => {
                   <>
                     <Link to="/request" className="menu menupanel enlace enlacesnavi">Solicitud</Link>
                     <Link to="/form" className="menu menupanel enlace enlacesnavi">Formulario</Link>
+                    <Link to="/credentials" className="menu menupanel enlace enlacesnavi">Credenciales</Link>
                     <Link to="/logout" className="menu menupanel enlace enlacesnavi">Cerrar sesión</Link>
                   </>
                 )}
@@ -107,7 +114,7 @@ const Header = () => {
           </div>
         </div>
       </header>
-    </div>
+    </>
   );
 }
 

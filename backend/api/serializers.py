@@ -20,16 +20,10 @@ class SpecialtySerializer(serializers.ModelSerializer):
 
 
 class NoteSerializer(serializers.ModelSerializer):
-    created_at = serializers.SerializerMethodField()
-    # specialty = SpecialtySerializer(read_only=True)  # Mostrar el nombre de la especialidad
-
     class Meta:
         model = Note
         fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
         extra_kwargs = {"author": {"read_only": True}}
-
-    def get_created_at(self, obj):
-        return obj.created_at.strftime("%d/%m/%Y")
     
     def validate(self, attrs):
         attrs = super().validate(attrs)
@@ -45,11 +39,14 @@ class NoteSerializer(serializers.ModelSerializer):
         return attrs
 
 class NoteListSerializer(serializers.ModelSerializer):
-    specialty = SpecialtySerializer(read_only=True)
+    specialty = SpecialtySerializer(read_only=True) # Mostrar el nombre de la especialidad
+    created_at = serializers.SerializerMethodField()
     
     class Meta:
         model = Note
         fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
         extra_kwargs = {"author": {"read_only": True}}
-    
+        
+    def get_created_at(self, obj):
+        return obj.created_at.strftime('%Y-%m-%d')
     

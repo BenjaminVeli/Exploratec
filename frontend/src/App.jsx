@@ -5,6 +5,7 @@ import Register from "./pages/Register"
 import Tour from "./pages/Tour"
 import Request from "./pages/Request"
 import Form from "./pages/Form"
+import Credentials from "./pages/Credentials"
 
 import AdminUsers from "./pages/admin/Admin-users"
 import AdminRequests from "./pages/admin/Admin-requests"
@@ -44,6 +45,7 @@ function App() {
           {/* Rutas protegidas para usuarios */}
           <Route path="/request" element={<ProtectedRoute><Request /></ProtectedRoute>}/>
           <Route path="/form" element={<ProtectedRoute><Form /></ProtectedRoute>}/>
+          <Route path="/credentials" element={<ProtectedRoute><Credentials /></ProtectedRoute>}/>
 
           {/* Rutas protegidas para administrador */}
           <Route path="/admin-users-list" element={<ProtectedRoute adminRoute> <AdminUsers /> </ProtectedRoute>}></Route>

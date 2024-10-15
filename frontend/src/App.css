@@ -418,12 +418,12 @@ i{
 }
   
 .input-field input:focus ~ label{
-    top: -25px;
+    top: -15px;
     font-size: 13px;
 }
   
 .input-field input:valid ~ label{
-   top: -25px;
+   top: -15px;
    font-size: 13px;
    color: #5d5076;
 }
@@ -1152,6 +1152,11 @@ p {
     }
   }
   @media (max-width: 940px) {
+    .menu_header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
     .theme_switchbyAlmeyda {
       display: none;
     }
@@ -1171,6 +1176,11 @@ p {
   @media (max-width: 780px) {
     .btn_nav.cronograma.navbar {
       display: none;
+    }
+    .menu_header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .circuitos__left {
       background-size: 120rem;
@@ -1218,6 +1228,11 @@ p {
   @media (max-width: 650px) {
     .panel_content {
       grid-template-columns: 1fr;
+    }
+    .menu_header{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
     }
     .stream {
       margin: 0;
