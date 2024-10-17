@@ -31,6 +31,7 @@ class Migration(migrations.Migration):
                 ('reason', models.TextField()),
                 ('is_accepted', models.BooleanField(default=False)),
                 ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('visit_date', models.DateTimeField(null=True, blank=True)),
                 ('specialty', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notes_especialidad', to='api.specialty')),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notes_author', to=settings.AUTH_USER_MODEL)),
             ],

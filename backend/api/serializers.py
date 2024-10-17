@@ -5,7 +5,7 @@ from .models import Specialty, Note
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = ["id", "username", "email", "password", "is_staff", "is_active"]
+        fields = ["id", "username", "email", "password", "is_staff", "is_active", "last_password_change"]
         extra_kwargs = {"password": {"write_only": True}}
         
     def create(self, validated_data):
@@ -22,7 +22,7 @@ class SpecialtySerializer(serializers.ModelSerializer):
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
+        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author","visit_date"]
         extra_kwargs = {"author": {"read_only": True}}
     
     def validate(self, attrs):

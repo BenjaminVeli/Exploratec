@@ -17,3 +17,4 @@ class Note(models.Model):
     is_accepted = models.BooleanField(default=False)
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes_author")
+    visit_date = models.DateTimeField(null=True, blank=True)

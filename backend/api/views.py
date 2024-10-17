@@ -8,6 +8,8 @@ from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Count , Q
 from rest_framework.pagination import PageNumberPagination
+from datetime import timedelta
+from django.utils import timezone
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -20,7 +22,7 @@ class CurrentUserView(APIView):
     def get(self, request):
         serializer = UserSerializer(request.user)
         return Response(serializer.data)
-    
+
 class ChangePasswordView(APIView):
     permission_classes = [IsAuthenticated]
 
@@ -29,13 +31,21 @@ class ChangePasswordView(APIView):
         current_password = request.data.get("current_password")
         new_password = request.data.get("new_password")
 
+        # Verificar si el usuario ha cambiado la contraseña en el último minuto
+        if user.last_password_change:
+            time_since_last_change = timezone.now() - user.last_password_change
+            if time_since_last_change < timedelta(minutes=1):
+                return Response({"error": "Solo puedes cambiar tu contraseña cada 1 minuto."}, status=status.HTTP_400_BAD_REQUEST)
+
+        # Verificar si la contraseña actual es correcta
         if not user.check_password(current_password):
             return Response({"error": "La contraseña actual es incorrecta."}, status=status.HTTP_400_BAD_REQUEST)
 
-        user.set_password(new_password)
+        user.set_password(new_password) # Establecer la nueva contraseña 
+        user.last_password_change = timezone.now()  # Actualizar el campo last_password_change a la fecha actual
         user.save()
-        return Response({"success": "Contraseña actualizada."}, status=status.HTTP_200_OK)
 
+        return Response({"success": "Contraseña actualizada."}, status=status.HTTP_200_OK) 
 
 class SpecialtyListCreate(generics.ListCreateAPIView):
     serializer_class = SpecialtySerializer

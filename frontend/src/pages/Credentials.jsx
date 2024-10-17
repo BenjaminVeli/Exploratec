@@ -56,8 +56,9 @@ const Credentials = () => {
         setConfirmPassword("");  
     } catch (error) {
         if (error.response) {
+            const errorMsg = error.response.data.error;
             if (error.response.status === 400) {
-                setErrorMessage("La contraseña actual es incorrecta.");
+              setErrorMessage(errorMsg || "Ocurrió un error. Inténtalo de nuevo más tarde.");
             } else {
                 setErrorMessage("Ocurrió un error. Inténtalo de nuevo más tarde.");
             }
