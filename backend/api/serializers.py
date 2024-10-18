@@ -41,12 +41,18 @@ class NoteSerializer(serializers.ModelSerializer):
 class NoteListSerializer(serializers.ModelSerializer):
     specialty = SpecialtySerializer(read_only=True) # Mostrar el nombre de la especialidad
     created_at = serializers.SerializerMethodField()
+    visit_date = serializers.SerializerMethodField()
     
     class Meta:
         model = Note
-        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author"]
+        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author","visit_date"]
         extra_kwargs = {"author": {"read_only": True}}
         
     def get_created_at(self, obj):
-        return obj.created_at.strftime('%Y-%m-%d')
+        return obj.created_at.strftime('%d/%m/%Y %H:%M')
+    
+    def get_visit_date(self, obj):
+        if obj.visit_date is not None:  # Verifica si visit_date no es None
+            return obj.visit_date.strftime('%d/%m/%Y %H:%M')
+        return None 
     

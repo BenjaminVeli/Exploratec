@@ -130,13 +130,13 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'es' #Lenguaje del público al que va dirigido
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'America/Lima'
 
-USE_I18N = True
+USE_I18N = False # Idioma internacionalizado en la app
 
-USE_TZ = True
+USE_TZ = False # Zona horaria universal
 
 
 # Static files (CSS, JavaScript, Images)
