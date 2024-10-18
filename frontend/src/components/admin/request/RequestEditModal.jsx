@@ -13,6 +13,18 @@ const RequestEditModal = ({ request, closeRequestEditModal, onRequestUpdated }) 
   };
 
   const handleConfirmEdit = () => {
+
+    
+    if (!isAccepted) {
+      alert("Confirme la solicitud de visita para continuar.");
+      return;
+    }
+
+    if (!visitDate) {
+      alert("Es necesario rellenar la fecha de visita.");
+      return; 
+    }
+    
     // Llama a la función onRequestUpdated con el nuevo estado
     onRequestUpdated({ ...request, is_accepted: isAccepted, visit_date: visitDate });
   };

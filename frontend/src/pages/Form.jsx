@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import api from "../api";
 import Header from "../components/Header";
 import MinusCircle from "../assets/svg/minus-circle.svg"
@@ -124,6 +124,7 @@ function Form() {
                 <h6 className="text-white text-xl font-bold uppercase">
                   Formulario de visita al campus
                 </h6>
+                <Link to="/privacy-policies" className="text-sky-600 hover:underline">Ver Políticas de privacidad</Link>
               </div>
             </div>
             <div className="flex-auto px-4 lg:px-10 py-10 pt-0 bg-slate-200">

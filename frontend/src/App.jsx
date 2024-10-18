@@ -6,6 +6,7 @@ import Tour from "./pages/Tour"
 import Request from "./pages/Request"
 import Form from "./pages/Form"
 import Credentials from "./pages/Credentials"
+import Policies from "./pages/Policies"
 
 import AdminUsers from "./pages/admin/Admin-users"
 import AdminRequests from "./pages/admin/Admin-requests"
@@ -41,6 +42,8 @@ function App() {
           <Route path="/logout-admin" element={<LogoutAdmin />} />
           <Route path="/authentication-admin" element={<AdminAuthentication />}></Route>
           <Route path="/tour" element={<Tour />}></Route>
+          <Route path="/privacy-policies" element={<Policies />}></Route>
+
 
           {/* Rutas protegidas para usuarios */}
           <Route path="/request" element={<ProtectedRoute><Request /></ProtectedRoute>}/>

@@ -150,7 +150,7 @@ const Start = () => {
                                     <div className="mb-10 mt-10 flex flex-col items-center">
                                         <h2 className="mb-4 text-4xl tracking-tight font-extrabold text-tecsup">¿Por qué mostramos estas estadísticas?</h2>
                                         <p className="mb-4 text-black"> En esta sección, presentamos las estadísticas de las carreras que nuestros visitantes han seleccionado al inscribirse para nuestras
-                                        visitas guiadas presenciales. Esta información nos ayuda a entender mejor los intereses de nuestros futuros estudiantes y a preparar
+                                        visitas guiadas presenciales. Esta información nos ayuda a entender mejor los intereses de los futuros estudiantes de Tecsup , preparar
                                         experiencias más personalizadas y relevantes durante las visitas.</p>
                                     </div>
         

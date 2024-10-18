@@ -11,12 +11,13 @@ const RequestDetailsModal = ({ request, closeRequestDetailsModal }) => {
           <h3 className="text-2xl text-white uppercase">Request Details</h3>
         </div>
         <div className="p-4 text-base">          
-          <p className="text-white">ID: {request.id}</p>
           <p className="text-white">Name: {request.name}</p>
           <p className="text-white">Lastname: {request.lastname}</p>
           <p className="text-white">Phone: {request.phone}</p>
           <p className="text-white">Motivo: {request.reason}</p>
-          <p className="text-white">Especialidad: {request.specialty}</p>
+          <p className="text-white">Especialidad: {request.specialty.name}</p>
+          <p className="text-white">Created note: {request.created_at}</p>
+          <p className="text-white">Visit date: {request.visit_date}</p>
 
           
           {request.is_accepted ? (
