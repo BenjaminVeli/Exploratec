@@ -9,6 +9,7 @@ import Credentials from "./pages/Credentials"
 import Policies from "./pages/Policies"
 
 import AdminUsers from "./pages/admin/Admin-users"
+import AdminKpis from "./pages/admin/Admin-kpis"
 import AdminRequests from "./pages/admin/Admin-requests"
 import AdminAuthentication from "./pages/admin/Admin-authentication"
 
@@ -51,6 +52,7 @@ function App() {
           <Route path="/credentials" element={<ProtectedRoute><Credentials /></ProtectedRoute>}/>
 
           {/* Rutas protegidas para administrador */}
+          <Route path="/admin-kpis" element={<ProtectedRoute adminRoute> <AdminKpis /> </ProtectedRoute>}></Route>
           <Route path="/admin-users-list" element={<ProtectedRoute adminRoute> <AdminUsers /> </ProtectedRoute>}></Route>
           <Route path="/admin-requests-list" element={<ProtectedRoute adminRoute> <AdminRequests /> </ProtectedRoute>}></Route>
 
