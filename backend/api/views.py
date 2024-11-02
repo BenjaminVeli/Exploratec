@@ -100,6 +100,32 @@ class SpecialtyStatsView(APIView):
         
         return Response(all_stats)
     
+    
+# ------------------------- Reports -------------------------    
+
+class UserCountView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        active_users = User.objects.filter(is_active=True).count()  # Total de usuarios activos 
+        deactive_users = User.objects.filter(is_active=False).count()  # Total de usuarios desactivados
+        
+        return Response({
+            'active_users': active_users,
+            'deactive_users': deactive_users
+        })
+
+class RequestCountView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        accepted_visit = Note.objects.filter(is_accepted=True).count()  # Total de usuarios activos 
+        pending_visit = Note.objects.filter(is_accepted=False).count()  # Total de usuarios desactivados
+        
+        return Response({
+            'accepted_visit': accepted_visit,
+            'pending_visit': pending_visit
+        })
 
 # ------------------------- Request CRUD -------------------------
 

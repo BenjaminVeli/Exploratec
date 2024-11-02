@@ -18,5 +18,9 @@ urlpatterns = [
     
     
     path('current-user/', views.CurrentUserView.as_view(), name='current-user'),
-     path('change-password/', views.ChangePasswordView.as_view(), name='change-password')
+    path('change-password/', views.ChangePasswordView.as_view(), name='change-password'),
+    
+    path('user-count/', views.UserCountView.as_view(), name='user-count'),
+    path('request-count/', views.RequestCountView.as_view(), name='request-count'),
+    
 ]

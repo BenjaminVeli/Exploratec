@@ -1,7 +1,39 @@
+import { useState, useEffect } from "react";
 import Header from "../../components/Header";
 import { ArrowUp, ArrowDown, Users, UserMinus,CheckCheck, Clock, Minus } from 'lucide-react';
+import api from "../../api";
 
 const AdminKpis = () => {
+  const [usersCount, setUsersCount ] =  useState({ active_users: 0 , deactive_users: 0});
+  const [requestsCount, setRequestsCount ] =  useState({ accepted_visit: 0 , pending_visit: 0});
+  
+
+  useEffect(() => {
+    const fetchUsersCount = async () => {
+      try {
+        const response = await api.get('/api/user-count/');
+        setUsersCount(response.data); 
+      } catch (error) {
+        console.error('Error getting users counts:', error);
+      }
+    };
+
+    fetchUsersCount();
+  }, []);
+
+  useEffect(() => {
+    const fetchRequestsCount = async () => {
+      try {
+        const response = await api.get('/api/request-count/');
+        setRequestsCount(response.data); 
+      } catch (error) {
+        console.error('Error getting requests counts:', error);
+      }
+    };
+
+    fetchRequestsCount();
+  }, []);
+
   return (
     <div className="bg-report dark:bg-reportdark min-h-screen">
       <Header />
@@ -14,7 +46,7 @@ const AdminKpis = () => {
             </div>
             <div className="mt-4 flex items-end justify-between">
               <div>
-                <h4 className="text-2xl font-bold text-black dark:text-white">30</h4>
+                <h4 className="text-2xl font-bold text-black dark:text-white">{requestsCount.accepted_visit}</h4>
                 <span className="text-sm font-medium text-txtreport dark:text-txtreportdark">Total accepted visits</span>
               </div>
               <ArrowUp size={16} className="text-meta3"/>
@@ -27,7 +59,7 @@ const AdminKpis = () => {
             </div>
             <div className="mt-4 flex items-end justify-between">
               <div>
-                <h4 className="text-2xl font-bold text-black dark:text-white">30</h4>
+                <h4 className="text-2xl font-bold text-black dark:text-white">{requestsCount.pending_visit}</h4>
                 <span className="text-sm font-medium text-txtreport dark:text-txtreportdark">Total pending visits</span>
               </div>
               <ArrowDown size={16} className="text-meta5"/>
@@ -40,8 +72,8 @@ const AdminKpis = () => {
             </div>
             <div className="mt-4 flex items-end justify-between">
               <div>
-                <h4 className="text-2xl font-bold text-black dark:text-white">30</h4>
-                <span className="text-sm font-medium text-txtreport dark:text-txtreportdark">Total users</span>
+                <h4 className="text-2xl font-bold text-black dark:text-white">{usersCount.active_users}</h4>
+                <span className="text-sm font-medium text-txtreport dark:text-txtreportdark">Total active users</span>
               </div>
               <ArrowUp size={16} className="text-meta3"/>
             </div>
@@ -53,7 +85,7 @@ const AdminKpis = () => {
             </div>
             <div className="mt-4 flex items-end justify-between">
               <div>
-                <h4 className="text-2xl font-bold text-black dark:text-white">30</h4>
+                <h4 className="text-2xl font-bold text-black dark:text-white">{usersCount.deactive_users}</h4>
                 <span className="text-sm font-medium text-txtreport dark:text-txtreportdark">Total deactivated users</span>
               </div>
               <Minus size={16} className="text-meta6"/>
