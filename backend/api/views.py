@@ -127,20 +127,37 @@ class RequestCountView(APIView):
             'pending_visit': pending_visit
         })
 
+from django.utils import timezone
+from datetime import timedelta
+from django.db.models import Count
+from calendar import day_abbr  # Para nombres abreviados en inglés
+from django.utils.formats import date_format  # Para nombres en español
+
 class WeeklyUserRegistrationsView(APIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
+    
+    def get_day_name(self, date):
+        # Diccionario de equivalencias para días en español
+        dias = {
+            0: 'M',  # Lunes
+            1: 'T',  # Martes
+            2: 'W',  # Miércoles
+            3: 'T',  # Jueves
+            4: 'F',  # Viernes
+            5: 'S',  # Sábado
+            6: 'S'   # Domingo
+        }
+        return dias[date.weekday()]
 
     def get(self, request):
         today = timezone.now().date()
-        # Calcular el lunes de la semana actual
         start_of_week = today - timedelta(days=today.weekday())
-        # Calcular el domingo de la semana actual
         end_of_week = start_of_week + timedelta(days=6)
-
-        # Filtrar usuarios registrados en la semana actual
-        users_this_week = User.objects.filter(date_joined__date__range=(start_of_week, end_of_week))
         
-        # Opcional: agrupar por día para el gráfico
+        users_this_week = User.objects.filter(
+            date_joined__date__range=(start_of_week, end_of_week)
+        )
+        
         daily_counts = (
             users_this_week
             .extra(select={'day': 'DATE(date_joined)'})
@@ -149,8 +166,17 @@ class WeeklyUserRegistrationsView(APIView):
             .order_by('day')
         )
 
-        return Response({"weekly_user_registrations": list(daily_counts)})
+        # Convertir los resultados y añadir el nombre del día
+        formatted_counts = []
+        for item in daily_counts:
+            date_obj = timezone.datetime.strptime(str(item['day']), '%Y-%m-%d').date()
+            formatted_counts.append({
+                'day': self.get_day_name(date_obj),  # Nombre abreviado del día
+                'full_date': str(item['day']),       # Mantenemos la fecha completa por si la necesitas
+                'count': item['count']
+            })
 
+        return Response({"weekly_user_registrations": formatted_counts})
 
 # ------------------------- Request CRUD -------------------------
 

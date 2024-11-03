@@ -10,7 +10,8 @@ import {
     PointElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler
 } from 'chart.js';
 
 ChartJS.register(
@@ -20,7 +21,8 @@ ChartJS.register(
     PointElement,
     Title,
     Tooltip,
-    Legend
+    Legend,
+    Filler
 );
 
 const UsersWeek = () => {
@@ -44,28 +46,31 @@ const UsersWeek = () => {
         }
     };
 
-    const colors = [
-        'rgba(75, 192, 192, 0.5)',
-        'rgba(255, 99, 132, 0.5)',
-        'rgba(54, 162, 235, 0.5)',
-        'rgba(255, 206, 86, 0.5)',
-        'rgba(75, 192, 192, 0.5)',
-        'rgba(153, 102, 255, 0.5)',
-        'rgba(255, 159, 64, 0.5)',
-    ];
-
-    const borderColors = colors.map(color => color.replace('0.5', '1'));
-
     const data = {
         labels: userStats.map(stat => stat.day),
         datasets: [
             {
                 label: 'Usuarios Registrados',
                 data: userStats.map(stat => stat.count),
-                backgroundColor: colors,
-                borderColor: borderColors,
+                backgroundColor: (context) => {
+                    const chart = context.chart;
+                    const {ctx, chartArea} = chart;
+                    if (!chartArea) {
+                        return null;
+                    }
+                    const gradient = ctx.createLinearGradient(0, chartArea.bottom, 0, chartArea.top);
+                    gradient.addColorStop(0, 'rgba(75, 192, 192, 0.1)');     // Transparente abajo
+                    gradient.addColorStop(1, 'rgba(75, 192, 192, 0.8)');   // Semi-transparente arriba
+                return gradient;
+                },
+                borderColor: 'rgb(75, 192, 192)',
                 borderWidth: 2,
-                fill: true, // Hace que la línea no esté rellena
+                fill: true,
+                tension: 0.4,  // Esto hace las líneas más suaves
+                pointRadius: 4,
+                pointBackgroundColor: 'rgb(75, 192, 192)',
+                pointBorderColor: 'white',
+                pointBorderWidth: 2,
             },
         ],
     };
@@ -80,19 +85,31 @@ const UsersWeek = () => {
             },
             y: {
                 grid: {
-                    display: false,
+                    display: true,
                 },
-                ticks: {
-                    callback: function(value) {
-                        return Number(value).toFixed(0);
-                    }
+                border: {
+                    width: 0 // Ajusta el grosor de la línea del eje
                 }
             },
         },
+        plugins: {
+            legend: {
+                labels: {
+                    usePointStyle: true,
+                    boxWidth: 10,
+                    boxHeight: 10,
+                    color: 'rgb(128 202 238)',
+                    font: {
+                        weight: 'bold', // Hace el texto bold
+                        size: 14 // Tamaño del texto (ajústalo según necesites)
+                    }
+                }
+            },
+        }
     };
 
     return (
-        <div className="chart-container w-full">
+        <div className="w-full">
             {loading ? (
                 <div className="text-center text-white">Cargando estadísticas...</div>
             ) : error ? (
