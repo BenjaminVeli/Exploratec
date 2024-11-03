@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
-import Header from "../../components/Header";
 import { ArrowUp, ArrowDown, Users, UserMinus,CheckCheck, Clock, Minus } from 'lucide-react';
 import api from "../../api";
+
+import Header from "../../components/Header";
+import UsersWeek from "../../components/UsersWeek";
 
 const AdminKpis = () => {
   const [usersCount, setUsersCount ] =  useState({ active_users: 0 , deactive_users: 0});
@@ -34,11 +36,13 @@ const AdminKpis = () => {
     fetchRequestsCount();
   }, []);
 
+
+
   return (
     <div className="bg-report dark:bg-reportdark min-h-screen">
       <Header />
       <div className="mx-auto max-w-screen-2xl p-4 md:p-6 2xl:p-10 mt-14 sm:mt-16">
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-7.5">
+        <div className="grid grid-cols-1 gap-4 md:grid-cols-2 md:gap-6 xl:grid-cols-4 2xl:gap-8">
 
           <div className="rounded-sm border bg-white px-8 py-6 shadow-default dark:border-slate-600 dark:bg-boxdark">
             <div className="flex h-10 w-10 items-center justify-center rounded-full bg-meta2 dark:bg-meta4">
@@ -93,6 +97,16 @@ const AdminKpis = () => {
           </div>
 
 
+        </div>
+
+        <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-8 2xl:gap-8">
+        
+          <div className="col-span-12 rounded-sm border border-stroke bg-white p-8 shadow-default dark:border-slate-600 dark:bg-boxdark xl:col-span-4">
+            <div className="mb-4">
+              <h4 className="text-xl font-bold text-black dark:text-white">New Users this Week</h4>
+            </div>
+            <UsersWeek />
+          </div>
         </div>
       </div>
     </div>

@@ -127,6 +127,31 @@ class RequestCountView(APIView):
             'pending_visit': pending_visit
         })
 
+class WeeklyUserRegistrationsView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        today = timezone.now().date()
+        # Calcular el lunes de la semana actual
+        start_of_week = today - timedelta(days=today.weekday())
+        # Calcular el domingo de la semana actual
+        end_of_week = start_of_week + timedelta(days=6)
+
+        # Filtrar usuarios registrados en la semana actual
+        users_this_week = User.objects.filter(date_joined__date__range=(start_of_week, end_of_week))
+        
+        # Opcional: agrupar por día para el gráfico
+        daily_counts = (
+            users_this_week
+            .extra(select={'day': 'DATE(date_joined)'})
+            .values('day')
+            .annotate(count=Count('id'))
+            .order_by('day')
+        )
+
+        return Response({"weekly_user_registrations": list(daily_counts)})
+
+
 # ------------------------- Request CRUD -------------------------
 
 class RequestPagination(PageNumberPagination):

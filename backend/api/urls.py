@@ -22,5 +22,6 @@ urlpatterns = [
     
     path('user-count/', views.UserCountView.as_view(), name='user-count'),
     path('request-count/', views.RequestCountView.as_view(), name='request-count'),
+    path('weekly-user-registrations/', views.WeeklyUserRegistrationsView.as_view(), name='weekly-user-registrations'),
     
 ]
