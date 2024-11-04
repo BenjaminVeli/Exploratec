@@ -50,7 +50,7 @@ const UsersWeek = () => {
         labels: userStats.map(stat => stat.day),
         datasets: [
             {
-                label: 'Usuarios Registrados',
+                label: 'Registered users',
                 data: userStats.map(stat => stat.count),
                 backgroundColor: (context) => {
                     const chart = context.chart;
@@ -111,11 +111,11 @@ const UsersWeek = () => {
     return (
         <div className="w-full">
             {loading ? (
-                <div className="text-center text-white">Cargando estadísticas...</div>
+                <div className="text-center text-white">Loading statistic...</div>
             ) : error ? (
                 <div className="text-red-500 mb-4">{error}</div>
             ) : (
-                <Line data={data} options={options} />
+                <Line data={data} options={options}/>
             )}
         </div>
     );

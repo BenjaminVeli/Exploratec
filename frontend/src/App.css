@@ -263,28 +263,6 @@ span a:hover{
   }
 
 
- .section-tittle--career{
-  margin-top: 1rem;
-  margin-bottom: 1rem;
-  text-transform: uppercase;
-  font-size: 1.2rem;
-  justify-content: center;
-  display: flex;
-}
-
-.chart-container {
-  background-color: #fff;
-  padding: 20px;
-  /* width: 400px; */
-} 
-
-
-
-
-
-
-
-
 /* ---------------------- form ---------------------- */
 
 .button--submit{

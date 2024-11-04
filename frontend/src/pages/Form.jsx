@@ -201,7 +201,7 @@ function Form() {
                 <div className="flex flex-wrap">
                   <div className="w-full lg:w-12/12 px-4">
                     <div className="relative w-full mb-3">
-                      <textarea value={reason} onChange={(e) => setReason(e.target.value)} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4"></textarea>
+                      <textarea value={reason} onChange={(e) => setReason(e.target.value)} onClick={() => alert("Antes de escribir el motivo de su visita, por favor indique también sus días y horarios de disponibilidad.")} className="border-0 px-3 py-3 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150" rows="4"></textarea>
                     </div>
                   </div>
                 </div>

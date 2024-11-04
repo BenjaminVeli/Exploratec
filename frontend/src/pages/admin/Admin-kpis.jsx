@@ -3,6 +3,7 @@ import { ArrowUp, ArrowDown, Users, UserMinus,CheckCheck, Clock, Minus } from 'l
 import api from "../../api";
 
 import Header from "../../components/Header";
+import Statistics from "../../components/Statistics";
 import UsersWeek from "../../components/UsersWeek";
 
 const AdminKpis = () => {
@@ -102,7 +103,7 @@ const AdminKpis = () => {
         <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-8 2xl:gap-8">
 
           <div className="col-span-12 rounded-sm border bg-white px-5 pb-5 pt-8 shadow-default dark:border-slate-600 dark:bg-boxdark sm:px-8 xl:col-span-8">
-
+            <Statistics />
           </div>
 
           <div className="col-span-12 rounded-sm border bg-white p-8 shadow-default dark:border-slate-600 dark:bg-boxdark xl:col-span-4">
