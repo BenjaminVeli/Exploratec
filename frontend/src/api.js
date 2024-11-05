@@ -27,8 +27,8 @@ api.interceptors.response.use(
       // Eliminar el token del localStorage para cerrar la sesión
       localStorage.removeItem(ACCESS_TOKEN);
       
-      // Mostramos una única alerta y redirigimos al login
-      alert("La sesión ha expirado. Serás redirigido al inicio de sesión.");
+      // // Mostramos una única alerta y redirigimos al login
+      // alert("La sesión ha expirado. Serás redirigido al inicio de sesión.");
       
       // Redirigir manualmente al login
       window.location.href = "/login";

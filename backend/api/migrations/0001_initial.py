@@ -34,6 +34,10 @@ class Migration(migrations.Migration):
                 ('visit_date', models.DateTimeField(null=True, blank=True)),
                 ('specialty', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notes_especialidad', to='api.specialty')),
                 ('author', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='notes_author', to=settings.AUTH_USER_MODEL)),
+                ('family_dni', models.CharField(max_length=9, null=True, blank=True)),
+                ('family_lastname', models.CharField(blank=True, max_length=100, null=True)),
+                ('family_name', models.CharField(blank=True, max_length=100, null=True)),
+                ('gender', models.CharField(max_length=100)),
             ],
         ),
     ]

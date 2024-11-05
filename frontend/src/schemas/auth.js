@@ -34,13 +34,19 @@ export const formSchema = z.object({
   dni: z
   .string()
   .length(8, "Debe ingresar un dni válido."),
-  phone: z
+  gender: z
   .string()
-  .length(9, "Debe ingresar un teléfono válido."),
+  .min(1, "El género es requerido."),
   specialty: z
   .string()
   .min(1, "La especialidad es requerida."),
+  phone: z
+  .string()
+  .length(9, "Debe ingresar un teléfono válido."),
   reason: z
   .string()
   .min(1, "El Motivo es requerido."),
+  acceptTerms: z
+  .boolean()
+  .refine(value => value === true, "Debes aceptar la política de privacidad para poder solicitar tu visita.")
 })

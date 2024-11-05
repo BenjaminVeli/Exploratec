@@ -22,7 +22,7 @@ class SpecialtySerializer(serializers.ModelSerializer):
 class NoteSerializer(serializers.ModelSerializer):
     class Meta:
         model = Note
-        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author","visit_date"]
+        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author","visit_date","family_name","family_lastname","family_dni","gender"]
         extra_kwargs = {"author": {"read_only": True}}
     
     def validate(self, attrs):
@@ -45,7 +45,7 @@ class NoteListSerializer(serializers.ModelSerializer):
     
     class Meta:
         model = Note
-        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author","visit_date"]
+        fields = ["id", "name", "lastname", "dni", "phone", "reason", "is_accepted", "created_at", "specialty", "author","visit_date","family_name","family_lastname","family_dni","gender"]
         extra_kwargs = {"author": {"read_only": True}}
         
     def get_created_at(self, obj):

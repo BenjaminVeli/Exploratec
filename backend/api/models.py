@@ -18,3 +18,8 @@ class Note(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     author = models.ForeignKey(User, on_delete=models.CASCADE, related_name="notes_author")
     visit_date = models.DateTimeField(null=True, blank=True)
+    gender = models.CharField(max_length=100)
+    family_name = models.CharField(max_length=100, null=True, blank=True)
+    family_lastname = models.CharField(max_length=100, null=True, blank=True)
+    family_dni = models.CharField(max_length=9, null=True, blank=True)
+    

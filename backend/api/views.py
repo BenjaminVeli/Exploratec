@@ -103,6 +103,18 @@ class SpecialtyStatsView(APIView):
     
 # ------------------------- Reports -------------------------    
 
+class GenderCountView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+
+    def get(self, request):
+        male_count = Note.objects.filter(gender="Masculino").count()  # Total de registros con género Masculino
+        female_count = Note.objects.filter(gender="Femenino").count()  # Total de registros con género Femenino
+
+        return Response({
+            'male_count': male_count,
+            'female_count': female_count
+        })
+
 class UserCountView(APIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
 
