@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Doughnut } from 'react-chartjs-2';
-import api from '../../api';
+import api from '../../../api';
 
 import {
     Chart as ChartJS,

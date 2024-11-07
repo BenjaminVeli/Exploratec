@@ -195,7 +195,7 @@ class MonthlyVisitCountView(APIView):
             .filter(visit_date__isnull=False)
             .values(month=TruncMonth('visit_date'))  # Agrupar por mes
             .annotate(visit_count=Count('id'))  # Contar visitas por mes
-            .order_by('-month')  # Ordenar de más reciente a más antiguo
+            .order_by('month')  # Ordenar de más reciente a más antiguo
         )
 
         # Diccionario para mapear el número de mes al nombre del mes en español

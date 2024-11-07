@@ -3,9 +3,11 @@ import { ArrowUp, ArrowDown, Users, UserMinus,CheckCheck, Clock, Minus } from 'l
 import api from "../../api";
 
 import Header from "../../components/Header";
-import Statistics from "../../components/admin/Statistics";
-import UsersWeek from "../../components/admin/UsersWeek";
-import GenderDoughnut from "../../components/admin/GenderDoughnut";
+import Statistics from "../../components/admin/kpi/Statistics";
+import UsersWeek from "../../components/admin/kpi/UsersWeek";
+import GenderDoughnut from "../../components/admin/kpi/GenderDoughnut";
+import VisitsMounthly from "../../components/admin/kpi/VisitsMounthly";
+
 
 const AdminKpis = () => {
   const [usersCount, setUsersCount ] =  useState({ active_users: 0 , deactive_users: 0});
@@ -117,7 +119,7 @@ const AdminKpis = () => {
 
         <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-8 2xl:gap-8">
           <div className="col-span-12 rounded-sm border bg-white px-5 pb-5 pt-8 shadow-default dark:border-slate-600 dark:bg-boxdark sm:px-8 xl:col-span-8">
-
+            <VisitsMounthly/>
           </div>
 
           <div className="col-span-12 rounded-sm border bg-white p-8 shadow-default dark:border-slate-600 dark:bg-boxdark xl:col-span-4">
