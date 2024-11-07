@@ -10,6 +10,7 @@ from django.db.models import Count , Q
 from rest_framework.pagination import PageNumberPagination
 from datetime import timedelta
 from django.utils import timezone
+from django.db.models.functions import TruncMonth
 
 class CreateUserView(generics.CreateAPIView):
     queryset = User.objects.all()
@@ -139,12 +140,6 @@ class RequestCountView(APIView):
             'pending_visit': pending_visit
         })
 
-from django.utils import timezone
-from datetime import timedelta
-from django.db.models import Count
-from calendar import day_abbr  # Para nombres abreviados en inglés
-from django.utils.formats import date_format  # Para nombres en español
-
 class WeeklyUserRegistrationsView(APIView):
     permission_classes = [IsAuthenticated, IsAdminUser]
     
@@ -189,6 +184,38 @@ class WeeklyUserRegistrationsView(APIView):
             })
 
         return Response({"weekly_user_registrations": formatted_counts})
+
+class MonthlyVisitCountView(APIView):
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    
+    def get(self, request, *args, **kwargs):
+        # Agregar la truncación de fecha por mes
+        monthly_visits = (
+            Note.objects
+            .filter(visit_date__isnull=False)
+            .values(month=TruncMonth('visit_date'))  # Agrupar por mes
+            .annotate(visit_count=Count('id'))  # Contar visitas por mes
+            .order_by('-month')  # Ordenar de más reciente a más antiguo
+        )
+
+        # Diccionario para mapear el número de mes al nombre del mes en español
+        month_names = {
+            1: "Ene", 2: "Feb", 3: "Mar", 4: "Abr", 5: "May", 6: "Jun",
+            7: "Jul", 8: "Ago", 9: "Sep", 10: "Oct", 11: "Nov", 12: "Dic"
+        }
+
+        # Formato de respuesta con el nombre del mes en lugar de la fecha
+        result = [
+            {
+                'month': month_names[month['month'].month],  # Obtiene el nombre abreviado del mes
+                'visit_count': month['visit_count']
+            }
+            for month in monthly_visits
+        ]
+
+        return Response(result, status=status.HTTP_200_OK)
+    
+    
 
 # ------------------------- Request CRUD -------------------------
 

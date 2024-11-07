@@ -24,5 +24,7 @@ urlpatterns = [
     path('request-count/', views.RequestCountView.as_view(), name='request-count'),
     path('gender-count/', views.GenderCountView.as_view(), name='gender-count'),
     path('weekly-user-registrations/', views.WeeklyUserRegistrationsView.as_view(), name='weekly-user-registrations'),
+    path('visits-monthly/', views.MonthlyVisitCountView.as_view(), name='visits-monthly'),
+    
     
 ]
