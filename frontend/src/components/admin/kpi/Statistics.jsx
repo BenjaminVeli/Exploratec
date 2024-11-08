@@ -71,6 +71,9 @@ const Statistics = () => {
                 grid: {
                     display: true,
                 },
+                ticks: {
+                    color: '#96A2A9',
+                }
             },
             y: {
                 grid: {
@@ -79,22 +82,16 @@ const Statistics = () => {
                 border: {
                     width: 0 // Ajusta el grosor de la línea del eje
                 },
+                ticks: {
+                    color: '#96A2A9',
+                }
             },
         },
         plugins: {
             legend: {
-                labels: {
-                    usePointStyle: true,
-                    boxWidth: 10,
-                    boxHeight: 10,
-                    color: 'rgb(60 80 224)',
-                    font: {
-                        weight: 'bold', // Hace el texto bold
-                        size: 14 // Tamaño del texto (ajústalo según necesites)
-                    }
-                }
+                display: false,  // Desactiva la leyenda
             },
-        }
+        },
     };
 
     return (

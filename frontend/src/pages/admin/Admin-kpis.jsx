@@ -106,6 +106,9 @@ const AdminKpis = () => {
         <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-8 2xl:gap-8">
 
           <div className="col-span-12 rounded-sm border bg-white px-5 pb-5 pt-8 shadow-default dark:border-slate-600 dark:bg-boxdark sm:px-8 xl:col-span-8">
+            <div className="mb-4">
+              <h4 className="text-xl font-bold text-black dark:text-white">Specialties selected by Users</h4>
+            </div>
             <Statistics />
           </div>
 
@@ -119,6 +122,9 @@ const AdminKpis = () => {
 
         <div className="mt-4 grid grid-cols-12 gap-4 md:mt-6 md:gap-6 2xl:mt-8 2xl:gap-8">
           <div className="col-span-12 rounded-sm border bg-white px-5 pb-5 pt-8 shadow-default dark:border-slate-600 dark:bg-boxdark sm:px-8 xl:col-span-8">
+            <div className="mb-4">
+              <h4 className="text-xl font-bold text-black dark:text-white">Number of Visits Monthly</h4>
+            </div>
             <VisitsMounthly/>
           </div>
 

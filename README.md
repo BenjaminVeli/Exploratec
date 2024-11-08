@@ -2,7 +2,7 @@
 
 360° Tour of the Lima Campus at Tecsup
 
-### Crear entorno virtual :
+### Create virtual environment :
 
 ```sh
 python -m venv env

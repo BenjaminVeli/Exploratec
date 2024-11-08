@@ -53,7 +53,7 @@ const GenderDoughnut = () => {
             legend: {
                 position: 'bottom',
                 labels: {
-                    color: '#4A5568', // Cambia el color de las etiquetas
+                    color: '#96A2A9', // Cambia el color de las etiquetas
                     font: {
                         size: 14,
                         weight: 'bold',

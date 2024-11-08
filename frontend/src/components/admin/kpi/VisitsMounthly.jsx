@@ -7,14 +7,12 @@ import {
     BarElement,
     CategoryScale,
     Tooltip,
-    Legend
 } from 'chart.js';
 
 ChartJS.register(
     BarElement,
     CategoryScale,
     Tooltip,
-    Legend
 );
 
 const VisitsMounthly = () => {
@@ -61,14 +59,7 @@ const VisitsMounthly = () => {
         responsive: true,
         plugins: {
             legend: {
-                position: 'top',
-                labels: {
-                    color: '#4A5568', // Legend label color
-                    font: {
-                        size: 14,
-                        weight: 'bold',
-                    },
-                },
+                display: false,  // Desactiva la leyenda
             },
         },
         scales: {
@@ -76,6 +67,9 @@ const VisitsMounthly = () => {
                 grid: {
                     display: false,
                 },
+                ticks: {
+                    color: '#96A2A9',
+                }
             },
             y: {
                 grid: {
@@ -84,6 +78,9 @@ const VisitsMounthly = () => {
                 border: {
                     width: 0 // Ajusta el grosor de la línea del eje
                 },
+                ticks: {
+                    color: '#96A2A9',
+                }
             },
         },
     };
@@ -95,7 +92,7 @@ const VisitsMounthly = () => {
             ) : error ? (
                 <div className="text-red-500 mb-4">{error}</div>
             ) : (
-                <Bar data={data} options={options} />
+                <Bar data={data} options={options} height={130}/>
             )}
         </div>
     );

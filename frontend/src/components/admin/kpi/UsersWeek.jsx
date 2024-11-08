@@ -82,6 +82,9 @@ const UsersWeek = () => {
                 grid: {
                     display: true,
                 },
+                ticks: {
+                    color: '#96A2A9',
+                }
             },
             y: {
                 grid: {
@@ -89,23 +92,17 @@ const UsersWeek = () => {
                 },
                 border: {
                     width: 0 // Ajusta el grosor de la línea del eje
+                },
+                ticks: {
+                    color: '#96A2A9',
                 }
             },
         },
         plugins: {
             legend: {
-                labels: {
-                    usePointStyle: true,
-                    boxWidth: 10,
-                    boxHeight: 10,
-                    color: 'rgb(128 202 238)',
-                    font: {
-                        weight: 'bold', // Hace el texto bold
-                        size: 14 // Tamaño del texto (ajústalo según necesites)
-                    }
-                }
+                display: false,  // Desactiva la leyenda
             },
-        }
+        },
     };
 
     return (
@@ -115,7 +112,7 @@ const UsersWeek = () => {
             ) : error ? (
                 <div className="text-red-500 mb-4">{error}</div>
             ) : (
-                <Line data={data} options={options}/>
+                <Line data={data} options={options} height={180}/>
             )}
         </div>
     );
