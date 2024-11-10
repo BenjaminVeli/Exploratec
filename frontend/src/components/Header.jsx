@@ -54,6 +54,7 @@ const Header = () => {
                 )}
                 {isAuthenticated && isAdmin() && (
                   <>
+                    <Link to="/admin-visits" className="enlace menu enlacesnavi">Visits Today</Link>
                     <Link to="/admin-kpis" className="enlace menu enlacesnavi">Reports</Link>
                     <Link to="/admin-requests-list" className="enlace menu enlacesnavi">Request List</Link>
                     <Link to="/admin-users-list" className="enlace menu enlacesnavi">User List</Link>
@@ -97,6 +98,7 @@ const Header = () => {
                 )}
                 {isAuthenticated && isAdmin() && (
                   <>
+                    <Link to="/admin-visits" className="menu menupanel enlace enlacesnavi">Visits Today</Link>
                     <Link to="/admin-kpis" className="menu menupanel enlace enlacesnavi">Reports</Link>
                     <Link to="/admin-requests-list" className="menu menupanel enlace enlacesnavi">Request List</Link>
                     <Link to="/admin-users-list" className="menu menupanel enlace enlacesnavi">User List</Link>

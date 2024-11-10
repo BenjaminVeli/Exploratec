@@ -215,7 +215,28 @@ class MonthlyVisitCountView(APIView):
 
         return Response(result, status=status.HTTP_200_OK)
     
+class VisitTododayPagination(PageNumberPagination):
+    page_size = 8
+    page_size_query_param = 'page_size'
+    max_page_size = 100
+
+class VisitTodayListView(APIView):
+    serializer_class = NoteListSerializer
+    permission_classes = [IsAuthenticated, IsAdminUser]
+    pagination_class = VisitTododayPagination
     
+    def get(self, request):
+        today = timezone.now().date()  # Obtiene la fecha actual
+        notes = Note.objects.filter(
+            visit_date__date=today  # Filtra solo los registros con `visit_date` del día de hoy
+        )
+        
+        # Paginación
+        paginator = VisitTododayPagination()
+        result_page = paginator.paginate_queryset(notes, request)
+        serializer = self.serializer_class(result_page, many=True)
+        return paginator.get_paginated_response(serializer.data)
+     
 
 # ------------------------- Request CRUD -------------------------
 
@@ -232,7 +253,8 @@ class RequestListView(APIView):
     def get(self, request):
         search_query = request.GET.get('search', '')  # Obtén el query de búsqueda
         notes = Note.objects.filter(
-            Q(name__icontains=search_query) | Q(lastname__icontains=search_query)  # Filtro de búsqueda
+            Q(name__icontains=search_query) | Q(lastname__icontains=search_query),  # Filtro de búsqueda
+            is_accepted=False
         )
         
         # Paginación
