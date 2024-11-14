@@ -82,11 +82,11 @@ const Start = () => {
                 </div>
 
                 <div className="get-into-360 mt-3 flex justify-center">
-                  <Link to="/tour">
+                  <a href="https://benjaminveli.github.io/Exploratec-360/">
                     <Reveal>
                       <EncryptButton />
                     </Reveal>
-                  </Link>
+                  </a>
                 </div>
               </div>
             </section>
@@ -121,7 +121,7 @@ const Start = () => {
                       <div className="w-64 bg-white dark:bg-neutral-950 rounded-3xl border border-gray-300 dark:border-neutral-950 overflow-hidden mb-5 hover:scale-105 transition-all duration-500 shadow-2xl">
                         <img className="w-full" src={d.img} alt={d.alt} />
                         <div className="p-5">
-                          <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-800">
+                          <h3 className="mb-2 text-xl font-bold tracking-tight text-slate-700">
                             {d.textH3}
                             <span className="text-tecsup">{d.textSpan}</span>
                           </h3>

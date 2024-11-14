@@ -14,7 +14,7 @@ const RequestDetailsModal = ({ request, closeRequestDetailsModal }) => {
           <p className="text-white">Name: {request.name}</p>
           <p className="text-white">Lastname: {request.lastname}</p>
           <p className="text-white">Phone: {request.phone}</p>
-          <p className="text-white">Motivo: {request.reason}</p>
+          <p className="text-white">Reason: {request.reason}</p>
           <p className="text-white">Created note: {request.created_at}</p>
           <p className="text-white">Visit date: {request.visit_date}</p>
 

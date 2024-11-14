@@ -6,9 +6,8 @@
         /* Estilos básicos */
         body {
             font-family: Arial, sans-serif;
-            color: #333333;
-            background-color: #f7f7f7;
             padding: 20px;
+            background: #e5e3e8;
         }
         .container {
             max-width: 600px;
@@ -17,27 +16,37 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border: 1px solid #ddd;
         }
         .header {
             text-align: center;
             padding: 10px 0;
+            color: #03aeec;
         }
         .content {
+            border-top: 1px solid #bcbcbc;
             padding: 20px 0;
         }
         .footer {
             text-align: center;
             padding: 10px 0;
-            font-size: 12px;
+            font-size: 13px;
             color: #777777;
         }
         .button {
             display: inline-block;
             padding: 10px 20px;
             color: #ffffff;
-            background-color: #007bff;
+            background-color: #03aeec;
             text-decoration: none;
-            border-radius: 5px;
+        }
+        .button-container {
+            display: flex; /* Usamos Flexbox solo para el contenedor del botón */
+            justify-content: center; /* Centra el botón */
+        }
+        .span-exploratec{
+            font-weight: bold;
+            color: #03aeec;
         }
     </style>
 </head>
@@ -49,10 +58,10 @@
         <div class="content">
             <p>Estimado/a {{ user_name }},</p>
             <p>Nos complace informarle que su solicitud de visita al campus ha sido aceptada. Para obtener más detalles sobre el proceso de ingreso y los requisitos para su visita, le invitamos a consultar nuestra página web o contactarnos directamente.</p>
-            <p><a href="{{ website_url }}" class="button">Visite Nuestra Web</a></p>
+            <div class="button-container"><a href="{{ website_url }}" class="button">Visite Nuestra Web</a></div>
         </div>
         <div class="footer">
-            <p>© 2024 Tecsup. Todos los derechos reservados.</p>
+            <p>© 2024 <span class="span-exploratec">ExploraTec™</span>. Todos los derechos reservados.</p>
         </div>
     </div>
 </body>

@@ -1,9 +1,8 @@
 from django.shortcuts import render
-from django.contrib.auth.models import User
 from rest_framework import generics, status
 from .serializers import UserSerializer , SpecialtySerializer, NoteSerializer, NoteListSerializer
 from rest_framework.permissions import IsAuthenticated, AllowAny, IsAdminUser
-from .models import Note, Specialty
+from .models import Note, Specialty, User
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from django.db.models import Count , Q
