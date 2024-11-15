@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from 'react';
-import debounce from 'lodash/debounce';
 import { SquarePen, Trash2, Eye, Search } from 'lucide-react';
 import api from "../../api";
 
@@ -40,16 +39,9 @@ const AdminRequests = () => {
     fetchRequests(currentPage);
   }, [currentPage, fetchRequests]);
 
-  const handleSearchChange = useCallback(
-    debounce((value) => {
-      setSearchQuery(value);
-      setCurrentPage(1);
-    }, 50),
-    []
-  );
-
   const onSearchInputChange = (e) => {
-    handleSearchChange(e.target.value);
+    setSearchQuery(e.target.value);
+    setCurrentPage(1);
   };
 
   const paginate = (pageNumber) => setCurrentPage(pageNumber);
