@@ -22,7 +22,7 @@ import Footer from "../components/Footer";
 import Header from "../components/Header";
 import SpecialtiesCount from "../components/SpecialtiesCount";
 
-import "../app.css";
+import "../App.css";
 
 const Start = () => {
   const [loading, setLoading] = useState(true);
