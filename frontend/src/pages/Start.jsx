@@ -224,7 +224,7 @@ const Start = () => {
                     <div className="relative z-10 flex flex-col items-center justify-center overflow-hidden rounded-[7px] bg-slate-900 p-8 transition-colors duration-500 group-hover:bg-slate-800">
                       <img src={Backend} alt="imgBackend" className="w-60" />
                       <h3 className="relative z-10 mb-1 w-full text-2xl font-bold text-slate-50 text-center">
-                        William Postillos
+                        Benjamín Veli
                       </h3>
                       <h4 className="relative z-10 mb-4 w-full text-1xl font-bold text-red-500 text-center uppercase">
                         Backend
